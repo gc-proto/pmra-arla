@@ -112,100 +112,13 @@
 	font-weight: 600;
 }
 
-.provisional.followus h2 {
-	font-size: 1.1em;
-	margin-top: 10px;
+.gc-srvinfo h3 {
+font-size: 20px !important;
 }
 
-.provisional.followus {
-	padding: 0;
+.gc-srvinfo p {
+font-size: 16px;
 }
-
-.provisional.followus h2 {
-	display: block;
-}
-
-.provisional.followus h2,
-.provisional.followus ul {
-	margin-left: 0;
-}
-
-.provisional.followus-vertical {
-	line-height: 0em;
-}
-
-.provisional.followus-vertical,
-.provisional.followus {
-	background-color: transparent;
-}
-
-.provisional.followus-vertical a {
-	text-decoration: none;
-}
-
-.provisional.followus-vertical ul {
-	display: block;
-	list-style-type: none;
-	margin-block-start: 1em;
-	padding-inline-start: 1em;
-	font-size: 16px;
-	margin-block-end: 0em;
-}
-
-.provisional.followus-vertical ul li {
-	margin-bottom: 15px;
-}
-
-.provisional.followus-vertical ul li:last-child {
-	margin-bottom: 0px;
-}
-
-.provisional.followus-vertical ul li a {
-	border: none;
-	padding: 0px 5px;
-}
-
-.provisional.followus ul li a {
-	border: none;
-}
-
-.provisional .social-lnk {
-	position: relative;
-	bottom:-18px;
-	left:45px;
-}
-
-.provisional.followus-vertical li {
-	display: block;
-	background-position: left;
-}
-
-.provisional.followus .facebook,
-.provisional.followus .twitter,
-.provisional.followus .youtube,
-.provisional.followus .instagram {
-	display: block;
-	height: 38px;
-	width: 38px;
-}
-/* remove this section if you do not want the new icons */
-
-.provisional.followus .facebook {
-	background: url("https://design.canada.ca/images/social-media/facebook.png") 0 0 / cover no-repeat;
-}
-.provisional.followus .twitter {
-	background: url("https://design.canada.ca/images/social-media/twitter.png") 0 0 / cover no-repeat;
-}
-.provisional.followus .youtube {
-	background: url("https://design.canada.ca/images/social-media/youtube.png") 0 0 / cover no-repeat;
-}
-.provisional.followus .instagram {
-	background: url("https://design.canada.ca/images/social-media/instagram.png") 0 0 / cover no-repeat;
-}
-.provisional.followus .linkedin {
-	background: url("https://design.canada.ca/images/social-media/linkedin.png") 0 0 / cover no-repeat;
-}
-/* end of new social media icons */
 
 @media screen and (min-width: 991px) {
 	.provisional.contributors li {
