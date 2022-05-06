@@ -150,12 +150,15 @@ font-size: 16px;
 }
 
 
-h1
+/** do I need to start public registry styles? probably. On Body tag. **/
+
+.pubreg  h1
 {
-  border: auto;
+  border-bottom: 1px solid #af3c43;
+  margin-top: .75em;
 }
 
-.badge {
+.pubreg  .badge {
   display: inline-block;
   padding: 0.25em 0.4em;
   font-size: 80%;
@@ -168,17 +171,17 @@ h1
   margin-top: none;
 }
 
-article .badge {
+.pubreg  article .badge {
   border-width: 0px;
   float: none;
 
 }
 
-  .badge:empty {
+.pubreg   .badge:empty {
     display: none; }
 
 
-.badge-initiation {
+.pubreg  .badge-initiation {
   color: #fff;
   background-color: #002D42; }
   .badge-initiation[href]:hover, .badge-initiation[href]:focus {
@@ -186,7 +189,7 @@ article .badge {
     text-decoration: none;
     background-color: #000a0f; }
 
-.badge-scoping {
+.pubreg .badge-scoping {
   color: #fff;
   background-color: #4D5D6C; }
   .badge-scoping[href]:hover, .badge-scoping[href]:focus {
@@ -194,7 +197,7 @@ article .badge {
     text-decoration: none;
     background-color: #38434e; }
 
-.badge-not-under-eval {
+.pubreg .badge-not-under-eval {
   color: #000;
   background-color: #CECECE; }
   .badge-not-under-eval[href]:hover, .badge-not-under-eval[href]:focus {
@@ -203,7 +206,7 @@ article .badge {
     background-color: #CECECE; }
 
 
-.badge-science-review {
+.pubreg .badge-science-review {
   color: #fff;
   background-color: #269abc; }
   .badge-science-review[href]:hover, .badge-science-review[href]:focus {
@@ -211,7 +214,7 @@ article .badge {
     text-decoration: none;
     background-color: #1d7792; }
 
-.badge-public-consultation {
+.pubreg .badge-public-consultation {
   color: #212529;
   background-color: #ff9900; }
   .badge-public-consultation[href]:hover, .badge-public-consultation[href]:focus {
