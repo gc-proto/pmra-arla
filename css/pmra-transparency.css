@@ -152,10 +152,10 @@ font-size: 16px;
 
 /** do I need to start public registry styles? probably. On Body tag. **/
 
-.pubreg  h1
+.pubreg h1
 {
-  border-bottom: 1px solid #af3c43;
-  margin-top: .75em;
+  border-bottom: 1px solid #af3c43 !important;
+  margin-top: .75em !important;
 }
 
 .pubreg  .badge {
