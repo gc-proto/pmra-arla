@@ -221,3 +221,18 @@ font-size: 16px;
     color: #212529;
     text-decoration: none;
     background-color: #cc7a00; }
+
+
+.pubreg .btn-login {
+        background-color: #26374a !important;
+        border: 1px solid #26374a !important;
+        font-weight: 600 !important;
+        font-family: "Lato";
+        font-size: 17px !important;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-top: 8px;
+        margin-right: 15px;
+        border-radius: 0;
