@@ -158,6 +158,14 @@ font-size: 16px;
   margin-top: .75em !important;
 }
 
+
+
+.pubreg #wb-sm {
+  background: #f5f5f5;
+  font-size: 13px;
+    min-height: auto;
+}
+
 .pubreg  .badge {
   display: inline-block;
   padding: 0.25em 0.4em;

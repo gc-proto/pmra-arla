@@ -17,15 +17,8 @@
 
 <main property="mainContentOfPage" resource="#wb-main" typeof="WebPageElement" class="container">
 <h1>This will be a login screen</h1>
-
-<script type="text/javascript">
-const params = new URLSearchParams(window.location.search);
-const name = params.get("src");
-
-if (name) {
- document.write("you came from" + src);
-}
-</script>
+<br />
+<button class="btn-sm btn-default" onclick="history.back();return false">Back for now!</button>
 
 </main>
 
