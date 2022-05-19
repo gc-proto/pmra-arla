@@ -245,132 +245,82 @@ margin: 5px;
 
 <div class="container">
 
-  <div class="mwscolumns section">
+  <div class="row mrgn-tp-md">
+        <div class="col-md-3">
+          <details open>
+            <summary class="btn btn-primary">Filter options</summary>
+            <p class="mrgn-tp-md">Use these filters to find templates and patterns.</p>
+            <form class="wb-tables-filter mrgn-lft-md mrgn-rght-md" data-bind-to="dataset-filter">
+              <div class="row">
+                <div class="form-group">
+                  <label for="dt_cat">Pattern, template or style</label>
+                  <select class="form-control maxwidth" id="dt_cat" name="dt_cat" data-column="2">
+                    <option value="">All</option>
+                    <option value="Design pattern">Design patterns</option>
+                    <option value="Template">Template</option>
+        <option value="Style">Style</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="dt_type">Types</label>
+                  <select class="form-control maxwidth" id="dt_type" name="dt_type" data-column="3">
+                    <option value="">All</option>
+                    <option value="NOI">Notice of Intent</option>
+                    <option value="PMRL">Proposed Maximum Residue Limit</option>
+                    <option value="PVRD">Proposed Re-evaluation</option>
+                    <option value="DD">Discussion Document</option>
 
-  		<div class="row ">
-  			<div class="col-md-4 col-xs-12 pull-right">
-          &nbsp;
-          <section class="panel panel-default panel-default">
-          <header class="panel-heading">
-          <h5 class="panel-title">Looking for information that is not available in the public register?</h5>
-          </header>
-            <div class="panel-body">
-              <p class="small">Some information may be made available upon request.</p>
-              <button type="button" class="btn btn-primary"  href="https://pest-control.canada.ca/public-engagement-portal/en/forms/inspection-confidential-test-data">Request to inspect confidential test data</button>
-            </div>
-          </section>
-
-
-          <section class="panel panel-default panel-default">
-          <header class="panel-heading">
-          <h5 class="panel-title">Ensure you're using products correctly</h5>
-          </header>
-            <div class="panel-body">
-              <p class="small">Use our label search to find the latest guidance on proper usage.</p>
-              <button type="button" class="btn btn-primary"  href="https://pest-control.canada.ca/pesticide-registry/en/label-search.html">Search for a product label</button>
-            </div>
-          </section>
-
-
-  				</div>
-  				<div class="col-md-8 pull-left" id="post-list">
-              <h3>Latest postings</h3>
-
-<section class="panel panel-default">
-  <div class="panel-body">
-<h5><a href="#">Fluopyram (PMRL2022-09) - Proposed Maximum Residue Limit</a></h5>
-<p>Posted: 16 May 2022</p>
-<p><span class="label label-success">Open consultation</span><span class="fas fa-clock-o" title="" alt=""></span>  Open until 28 July, 2022</p>
-  </div>
-</section>
-
-<section class="panel panel-default">
-  <div class="panel-body">
-<h5><a href="#">Dried Blood and Its Associated End-use Products (RVD2022-08) - Re-evaluation decision</a></h5>
-<p>Posted: 16 May 2022</p>
-<p><span class="label label-info">Decision</span></p>
-  </div>
-</section>
-
-
-<section class="panel panel-default">
-  <div class="panel-body">
-<h5><a href="#">Pyraclostrobin (PMRL2022-08) - Proposed Re-evaluation Decision</a></h5>
-<p>Posted: 29 April 2022</p>
-<p><span class="label label-success">Open consultation</span><span class="fas fa-clock-o" title="" alt=""></span>  Open until 28 July, 2022</p>
-  </div>
-</section>
-
-
-<section class="panel panel-default">
-  <div class="panel-body">
-<h5><a href="#">Methyl nonyl ketone and its associated end-use products (PMRL2022-08) - Proposed Maximum Residue Limit</a></h5>
-<p>Posted: 28 April 2022</p>
-<p><span class="label label-success">Open consultation</span><span class="fas fa-clock-o" title="" alt=""></span>  Open until 12 July, 2022</p>
-  </div>
-</section>
-
-
-
-<p class="small"><a href="consultations.html">See all consultations</a></p>
-
-  </div>
-</section>
-
-
-
-
-
-  		     </div>
-  </div>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="dt_mand">Consultation status</label>
+                  <select class="form-control maxwidth" id="dt_mand" name="dt_mand" data-column="4">
+                  <option value="">All</option>
+                  <option value="Yes">Open</option>
+                  <option value="No">No</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <button type="submit" class="btn btn-primary" aria-controls="dataset-filter">Filter</button>
+                </div>
+                <div class="col-md-6">
+                  <button type="reset" class="btn btn-default">Clear</button>
+                </div>
+              </div>
+            </form>
+          </details>
+        </div>
+        <div class="col-md-9 small">
+          <table class="wb-tables table table-striped table-hover" id="dataset-filter" aria-live="polite" data-wb-tables="{
+        &quot;iDisplayLength&quot;: 100,
+                          &quot;bDeferRender&quot;: true,
+        &quot;ajaxSource&quot;: &quot;https://test.canada.ca/pmra-arla/ajax/consultations.json&quot;,
+        &quot;order&quot;: [0, &quot;asc&quot;],
+        &quot;columns&quot;: [
+          { &quot;data&quot;: &quot;NAME&quot;, &quot;className&quot;: &quot;nws-tbl-name h4&quot; },
+          { &quot;data&quot;: &quot;ID&quot;, &quot;className&quot;: &quot;nws-tbl-use&quot; },
+          { &quot;data&quot;: &quot;TYPE&quot;, &quot;className&quot;: &quot;nws-tbl-cat&quot; },
+          { &quot;data&quot;: &quot;AI&quot;, &quot;className&quot;: &quot;nws-tbl-type&quot; },
+          { &quot;data&quot;: &quot;OPENDATE&quot;, &quot;visible&quot;: &quot;false&quot; }
+        ]}">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Active Ingredient</th>
+                <th>Open until</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
 
 
   </div>
   </div><!--end row-->
 
 
-
-  <div class="row">
-
-    <!-- showing the basic doormat pattern - refer to the Services and information documentation for options -->
-
-    <section class="gc-srvinfo col-md-12">
-      <h2>What's included in the registry</h2>
-      <div class="wb-eqht row">
-
-        <div class="col-lg-4 col-md-6">
-          <h3><a href="consultations.html">Public consultations</a></h3>
-          <p>Learn about how PMRA engages the public during the pesticide evaluation process, and how you can get involved.</p>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <h3><a href="activelist.html">Pesticides registered in Canada</a></h3>
-          <p>See Learn more about some of the pesticides currently registered for use in Canada</p>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <h3><a href="documents.html">Regulatory and policy documents</a></h3>
-          <p>Documentation describing  how pesticides are regulated</p>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <h3><a href="http://pesticide-registry.canada.ca/">Pesticide product information database</a></h3>
-          <p>A robust search tool to access PMRA records related to pesticide regulation</p>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <h3><a href="#">Public engagement portal</a></h3>
-          <p>File a complaint, comment on a consultation, request to inspect test data using these interactive forms</p>
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-
-
-
-
-
-</div>
 
 
 
