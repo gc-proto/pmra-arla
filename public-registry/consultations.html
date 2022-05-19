@@ -249,36 +249,21 @@ margin: 5px;
         <div class="col-md-3">
           <details open>
             <summary class="btn btn-primary">Filter options</summary>
-            <p class="mrgn-tp-md">Use these filters to find templates and patterns.</p>
+            <p class="mrgn-tp-md">Use these filters to find open consultations of interest.</p>
             <form class="wb-tables-filter mrgn-lft-md mrgn-rght-md" data-bind-to="dataset-filter">
               <div class="row">
                 <div class="form-group">
-                  <label for="dt_cat">Pattern, template or style</label>
+                  <label for="dt_cat">Notice type</label>
                   <select class="form-control maxwidth" id="dt_cat" name="dt_cat" data-column="2">
                     <option value="">All</option>
-                    <option value="Design pattern">Design patterns</option>
-                    <option value="Template">Template</option>
-        <option value="Style">Style</option>
+                    <option value="Decision document">Decision document (DIS)</option>
+                    <option value="Proposed maximum residue limit">Proposed maximum residue limit (PMRL)</option>
+                    <option value="Proposed maximum residue limit">Proposed re-evaluation decision (PVRD)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                  <label for="dt_type">Types</label>
-                  <select class="form-control maxwidth" id="dt_type" name="dt_type" data-column="3">
-                    <option value="">All</option>
-                    <option value="NOI">Notice of Intent</option>
-                    <option value="PMRL">Proposed Maximum Residue Limit</option>
-                    <option value="PVRD">Proposed Re-evaluation</option>
-                    <option value="DD">Discussion Document</option>
-
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="dt_mand">Consultation status</label>
-                  <select class="form-control maxwidth" id="dt_mand" name="dt_mand" data-column="4">
-                  <option value="">All</option>
-                  <option value="Yes">Open</option>
-                  <option value="No">No</option>
-                  </select>
+                  <label for="dt_type">Active ingredient</label>
+                    <input type="text"></input>
                 </div>
                 <div class="col-md-6">
                   <button type="submit" class="btn btn-primary" aria-controls="dataset-filter">Filter</button>
