@@ -4,13 +4,15 @@
     "ID": "<a href=\"https://www.canada.ca/en/health-canada/services/consumer-product-safety/pesticides-pest-management/public/consultations/discussion-documents/targeted-review-pest-control-products-act.html\">DIS2022-01</a>",
     "TYPE": "Discussion document",
     "AI": "N/A",
-    "OPENDATE": "June 30 2022"
+    "POSTDATE": "2022-05-11",
+    "OPENDATE": "2022-06-30"
 
     }, {
     "NAME": "fluopyram",
       "ID": "<a href=\"#\">PMRL2022-09</a>",
       "TYPE": "Proposed maximum residue limit",
       "AI": "<a href=\"#\">fluopyram</a>",
+    "POSTDATE": "2022-04-28",
       "OPENDATE": "2022-06-30"
 
       }, {
@@ -18,20 +20,23 @@
         "ID": "<a href=\"#\">PMRL2022-08</a>",
         "TYPE": "Proposed maximum residue limit",
         "AI": "<a href=\"#\">Pyraclostrobin</a>",
-        "OPENDATE": "2022-06-28"
+            "POSTDATE": "2022-04-28",
+        "OPENDATE": "2022-07-12"
 
         }, {
         "NAME": "Methyl Nonyl Ketone",
           "ID": "<a href=\"#\">PRVD2022-08</a>",
           "TYPE": "Proposed re-evaluation decision",
           "AI": "<a href=\"#\">Methyl Nonyl Ketone</a>",
+              "POSTDATE": "2022-04-29",
           "OPENDATE": "2022-07-28"
 
           }, {
-          "NAME": "potassium chloride and Potash Molluscicide",
+          "NAME": "Potassium chloride and Potash Molluscicide",
             "ID": "<a href=\"#\">PRD2022-06</a>",
             "TYPE": "Proposed registration decision",
-            "AI": "<a href=\"#\">potassium chloride and Potash Molluscicide</a>",
+            "AI": "<a href=\"#\">Potassium chloride and Potash Molluscicide</a>",
+                "POSTDATE": "2022-04-13",
             "OPENDATE": "2022-05-28"
 
             }, {
@@ -39,6 +44,7 @@
               "ID": "<a href=\"#\">PMRL2022-07</a>",
               "TYPE": "Proposed maximum residue limit",
               "AI": "<a href=\"#\">Topramezone</a>",
+                "POSTDATE": "2022-04-28",
               "OPENDATE": "2022-07-12"
               }, {
 
@@ -46,6 +52,7 @@
                 "ID": "<a href=\"#\">PMRL2022-06</a>",
                 "TYPE": "Proposed maximum residue limit",
                 "AI": "<a href=\"#\">Flutriafol</a>",
+                "POSTDATE": "2022-04-12",
                 "OPENDATE": "2022-06-26"
 
                 }, {
@@ -54,13 +61,15 @@
                   "ID": "<a href=\"#\">PMRL2022-05</a>",
                   "TYPE": "Proposed maximum residue limit",
                   "AI": "<a href=\"#\">Glufosinate-ammonium</a>",
+                  "POSTDATE": "2022-03-16",
                   "OPENDATE": "2022-05-30"
                   }, {
 
-                  "NAME": "thifensulfuron-methyl",
+                  "NAME": "Thifensulfuron-methyl",
                     "ID": "<a href=\"#\">PMRL2022-04</a>",
                     "TYPE": "Proposed maximum residue limit",
-                    "AI": "<a href=\"#\">thifensulfuron-methyl</a>",
+                    "AI": "<a href=\"#\">Thifensulfuron-methyl</a>",
+                    "POSTDATE": "2022-03-16",
                     "OPENDATE": "2022-05-30"
                     }, {
 
@@ -68,6 +77,7 @@
                       "ID": "<a href=\"#\">PMRL2022-03</a>",
                       "TYPE": "Proposed maximum residue limit",
                       "AI": "<a href=\"#\">Mandestrobin</a>",
+                      "POSTDATE": "2022-03-16",
                       "OPENDATE": "2022-05-30"
                       }, {
 
@@ -75,6 +85,7 @@
                         "ID": "<a href=\"#\">PMRL2022-02</a>",
                         "TYPE": "Proposed maximum residue limit",
                         "AI": "<a href=\"#\">pyraziflumid</a>",
+                        "POSTDATE": "2022-02-28",
                         "OPENDATE": "2022-05-14"
                         }, {
 
@@ -82,6 +93,7 @@
                           "ID": "<a href=\"#\">Canada Gazette, Part I</a>",
                           "TYPE": "Other",
                           "AI": "N/A",
+                          "POSTDATE": "2021-12-04",
                           "OPENDATE": "Unknown"
                           }, {
 
@@ -89,6 +101,7 @@
                             "ID": "<a href=\"#\">PVRD2022-07</a>",
                             "TYPE": " Proposed Re-evaluation Decision",
                             "AI": "<a href=\"#\">(Z)-9-tricosene</a>",
+                            "POSTDATE": "2022-04-26",
                             "OPENDATE": "2022-07-25"
                             }, {
 
@@ -96,6 +109,7 @@
                               "ID": "<a href=\"#\">PVRD2022-06</a>",
                               "TYPE": " Proposed Re-evaluation Decision",
                               "AI": "<a href=\"#\">Zoxamide</a>",
+                                "POSTDATE": "2022-03-28",
                               "OPENDATE": "2022-06-26"
                               }, {
 
@@ -103,6 +117,7 @@
       "ID": "<a href=\"#\">PVRD2022-05</a>",
       "TYPE": " Proposed Re-evaluation Decision",
       "AI": "<a href=\"#\">1-Methylcyclopropene</a>",
+    "POSTDATE": "2022-03-24",
       "OPENDATE": "2022-06-22"
 
 
@@ -111,10 +126,136 @@
               "ID": "<a href=\"#\">PVRD2022-03</a>",
               "TYPE": " Proposed Re-evaluation Decision",
               "AI": "<a href=\"#\">Chondrostereum purpureum strain PFC2139</a>",
+              "POSTDATE": "2022-03-22",
               "OPENDATE": "2022-06-20"
 
 
-                    }
+              }, {
+                "NAME": "Chlorothalonil",
+                "ID": "<a href=\"#\">PSRD2022-01</a>",
+                "TYPE": " Proposed Special Review Decision",
+                "AI": "<a href=\"#\">Chlorothalonil</a>",
+                "POSTDATE": "2022-02-10",
+                "OPENDATE": "2022-05-11"
+
+                      }, {
+                        "NAME": "Dried blood",
+                        "ID": "<a href=\"#\">RVD2022-08</a>",
+                        "TYPE": "Re-evaluation Decision",
+                        "AI": "<a href=\"#\">Dried blood</a>",
+                        "POSTDATE": "2022-05-16",
+                        "OPENDATE": "N/A"
+
+                        }, {
+                          "NAME": "Mustard Seed Powder (Brassica hirta) and Sodium Alpha-olefin Sulfonate",
+                          "ID": "<a href=\"#\">RVD2022-07</a>",
+                          "TYPE": "Re-evaluation Decision",
+                          "AI": "<a href=\"#\">Mustard Seed Powder (Brassica hirta) and Sodium Alpha-olefin Sulfonate</a>",
+                          "POSTDATE": "2022-05-16",
+                          "OPENDATE": "N/A"
+                                }, {
+                                  "NAME": "Straight Chain Lepidopteran Pheromones",
+                                  "ID": "<a href=\"#\">RVD2022-06</a>",
+                                  "TYPE": "Re-evaluation Decision",
+                                  "AI": "<a href=\"#\">Straight Chain Lepidopteran Pheromones</a>",
+                                  "POSTDATE": "2022-04-29",
+                                  "OPENDATE": "N/A"
+
+                                        }, {
+                                          "NAME": "Difenoconazole",
+                                          "ID": "<a href=\"#\">RVD2022-05</a>",
+                                          "TYPE": "Re-evaluation Decision",
+                                          "AI": "<a href=\"#\">Difenoconazole</a>",
+                                          "POSTDATE": "2022-04-21",
+                                          "OPENDATE": "N/A"
+
+                                                }, {
+                                                  "NAME": "Isoxaflutole",
+                                                  "ID": "<a href=\"#\">RVD2022-04</a>",
+                                                  "TYPE": "Re-evaluation Decision",
+                                                  "AI": "<a href=\"#\">Isoxaflutole</a>",
+                                                  "POSTDATE": "2022-04-07",
+                                                  "OPENDATE": "N/A"
+
+                                                        }, {
+                                                          "NAME": "Florasulam",
+                                                          "ID": "<a href=\"#\">RVD2022-03</a>",
+                                                          "TYPE": "Re-evaluation Decision",
+                                                          "AI": "<a href=\"#\">Florasulam</a>",
+                                                          "POSTDATE": "2022-04-07",
+                                                          "OPENDATE": "N/A"
+
+                                                                }, {
+                                                                  "NAME": "Triticonazole",
+                                                                  "ID": "<a href=\"#\">RVD2022-02</a>",
+                                                                  "TYPE": "Re-evaluation Decision",
+                                                                  "AI": "<a href=\"#\">Triticonazole</a>",
+                                                                  "POSTDATE": "2022-04-07",
+                                                                  "OPENDATE": "N/A"
+                                                                  }, {
+                                                                    "NAME": "Kresoxim-methyl",
+                                                                    "ID": "<a href=\"#\">RVD2022-01</a>",
+                                                                    "TYPE": "Re-evaluation Decision",
+                                                                    "AI": "<a href=\"#\">Kresoxim-methyl</a>",
+                                                                    "POSTDATE": "2022-01-31",
+                                                                    "OPENDATE": "N/A"
+                                                                    }, {
+                                                                      "NAME": "Pest Management Regulatory Agency Re-evaluation and Special Review Work Plan 2022-2027",
+                                                                      "ID": "<a href=\"#\">Workplan</a>",
+                                                                      "TYPE": "Re-evaluation note",
+                                                                      "AI": "N/A",
+                                                                      "POSTDATE": "2022-05-06",
+                                                                      "OPENDATE": "N/A"
+                                                                      }, {
+                                                                        "NAME": "Sheep Fat, Trico, and Trico Garden",
+                                                                        "ID": "<a href=\"#\">RD2022-04</a>",
+                                                                        "TYPE": "Registration decision",
+                                                                        "AI": "<a href=\"#\">Sheep Fat, Trico, and Trico Garden</a>",
+                                                                        "POSTDATE": "2022-05-10",
+                                                                        "OPENDATE": "N/A"
+
+                                                                        }, {
+                                                                          "NAME": "Flutianil and GATTEN",
+                                                                          "ID": "<a href=\"#\">RD2022-03</a>",
+                                                                          "TYPE": "Registration decision",
+                                                                          "AI": "<a href=\"#\">Flutianil and GATTEN</a>",
+                                                                          "POSTDATE": "2022-03-25",
+                                                                          "OPENDATE": "N/A"
+                                                                          }, {
+                                                                            "NAME": "Beauveria bassiana strain CFL-A, Fraxiprotec",
+                                                                            "ID": "<a href=\"#\">RD2022-02</a>",
+                                                                            "TYPE": "Registration decision",
+                                                                            "AI": "<a href=\"#\">Beauveria bassiana strain CFL-A, Fraxiprotec</a>",
+                                                                            "POSTDATE": "2022-03-25",
+                                                                            "OPENDATE": "N/A"
+                                                                            }, {
+                                                                              "NAME": "Oriental Mustard Seed Meal and MustGrow Crop Biofumigant",
+                                                                              "ID": "<a href=\"#\">RD2022-01</a>",
+                                                                              "TYPE": "Registration decision",
+                                                                              "AI": "<a href=\"#\">Oriental Mustard Seed Meal and MustGrow Crop Biofumigant</a>",
+                                                                              "POSTDATE": "2022-01-17",
+                                                                              "OPENDATE": "N/A"
+
+                                                                            }, {
+            "NAME": "Potential environmental risk related to squash bee exposure to Clothianidin, Thiamethoxam and Imidacloprid used on cucurbits",
+            "ID": "<a href=\"#\">SRD2022-02</a>",
+            "TYPE": "Special review decision",
+            "AI": "<a href=\"#\">Potential environmental risk related to squash bee exposure to Clothianidin, Thiamethoxam and Imidacloprid used on cucurbits</a>",
+            "POSTDATE": "2022-02-24",
+            "OPENDATE": "N/A"
+            }, {
+"NAME": "Naled",
+"ID": "<a href=\"#\">SRD2022-02</a>",
+"TYPE": "Special review decision",
+"AI": "<a href=\"#\">Naled</a>",
+"POSTDATE": "2022-01-12",
+"OPENDATE": "N/A"
+
+                                                                        }
+
+
+
+
 
     ]
 
