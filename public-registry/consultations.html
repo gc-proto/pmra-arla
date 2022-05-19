@@ -296,12 +296,13 @@ margin: 5px;
         &quot;iDisplayLength&quot;: 100,
                           &quot;bDeferRender&quot;: true,
         &quot;ajaxSource&quot;: &quot;https://test.canada.ca/pmra-arla/ajax/consultations.json&quot;,
-        &quot;order&quot;: [4, &quot;asc&quot;],
+        &quot;order&quot;: [4, &quot;desc&quot;],
         &quot;columns&quot;: [
           { &quot;data&quot;: &quot;NAME&quot;, &quot;className&quot;: &quot;nws-tbl-name h4&quot; },
           { &quot;data&quot;: &quot;ID&quot;, &quot;className&quot;: &quot;nws-tbl-id&quot; },
           { &quot;data&quot;: &quot;TYPE&quot;, &quot;className&quot;: &quot;nws-tbl-type&quot; },
           { &quot;data&quot;: &quot;AI&quot;, &quot;className&quot;: &quot;nws-tbl-ai&quot; },
+          { &quot;data&quot;: &quot;POSTDATE&quot;, &quot;className&quot;: &quot;nws-tbl-post&quot; },
           { &quot;data&quot;: &quot;OPENDATE&quot;, &quot;className&quot;: &quot;nws-tbl-opendate&quot; }
         ]}">
             <thead>
@@ -310,6 +311,7 @@ margin: 5px;
                 <th>ID</th>
                 <th>Type</th>
                 <th>Active Ingredient</th>
+                <th>Posted on</th>
                 <th>Open until</th>
               </tr>
             </thead>
