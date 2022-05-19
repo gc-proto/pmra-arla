@@ -8,12 +8,43 @@
 
     }, {
     "NAME": "fluopyram",
-      "ID": "<a href=\#\">PMRL2022-09</a>",
+      "ID": "<a href=\"#\">PMRL2022-09</a>",
       "TYPE": "Proposed maximum residue limit",
-      "AI": "<a href=\#\">fluopyram</a>",
+      "AI": "<a href=\"#\">fluopyram</a>",
       "OPENDATE": "June 30 2022"
       }
 
+      }, {
+      "NAME": "Pyraclostrobin",
+        "ID": "<a href=\"#\">PMRL2022-08</a>",
+        "TYPE": "Proposed maximum residue limit",
+        "AI": "<a href=\"#\">Pyraclostrobin</a>",
+        "OPENDATE": "June 28 2022"
+        }
+
+        }, {
+        "NAME": "Methyl Nonyl Ketone",
+          "ID": "<a href=\"#\">PRVD2022-08</a>",
+          "TYPE": "Proposed re-evaluation decision",
+          "AI": "<a href=\"#\">Methyl Nonyl Ketone</a>",
+          "OPENDATE": "July 28 2022"
+          }
+
+          }, {
+          "NAME": "potassium chloride and Potash Molluscicide",
+            "ID": "<a href=\"#\">PRD2022-06</a>",
+            "TYPE": "Proposed registration decision",
+            "AI": "<a href=\"#\">potassium chloride and Potash Molluscicide</a>",
+            "OPENDATE": "May 28 2022"
+            }
+
+            }, {
+            "NAME": "Topramezone",
+              "ID": "<a href=\"#\">PMRL2022-07</a>",
+              "TYPE": "Proposed maximum residue limit",
+              "AI": "<a href=\"#\">Topramezone</a>",
+              "OPENDATE": "July 12 2022"
+              }
 
     ]
 
