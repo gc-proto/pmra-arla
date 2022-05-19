@@ -256,9 +256,17 @@ margin: 5px;
                   <label for="dt_type">Notice type</label>
                   <select class="form-control maxwidth" id="dt_type" name="dt_type" data-column="2">
                     <option value="">All</option>
-                    <option value="discussion">Discussion document (DIS)</option>
-                    <option value="maximum">Proposed maximum residue limit (PMRL)</option>
-                    <option value="re-evaluation">Proposed re-evaluation decision (PVRD)</option>
+                    <option value="Dis">Discussion document</option>
+                    <option value="NOI">Notice of intent</option>
+                    <option value="acceptability">Proposed acceptability for continuing registration</option>
+                    <option value="max">Proposed maximum residue limit (PMRL)</option>
+                    <option value="Proposed re-evaluation decision">Proposed re-evaluation decision (PVRD)</option>
+                    <option value="Proposed registration decision">Proposed registration decision (PRD)</option>
+                    <option value="Proposed special review decision">Proposed special review decision (PSRD)</option>
+                    <option value="regulatory">Regulatory proposal</option>
+                    <option value="reevalnote">Re-evaluation note</option>  
+                    <option value="Other">Other</option>
+
                     </select>
                 </div>
                 <div class="form-group">
@@ -272,15 +280,16 @@ margin: 5px;
                   <button type="reset" class="btn btn-default">Clear</button>
                 </div>
               </div>
+
             </form>
           </details>
         </div>
         <div class="col-md-9 small">
           <table class="wb-tables table table-striped table-hover" id="dataset-filter" aria-live="polite" data-wb-tables="{
-        &quot;iDisplayLength&quot;: 100,&quot;searching&quot;: false,
+        &quot;iDisplayLength&quot;: 100,
                           &quot;bDeferRender&quot;: true,
         &quot;ajaxSource&quot;: &quot;https://test.canada.ca/pmra-arla/ajax/consultations.json&quot;,
-
+        &quot;order&quot;: [4, &quot;asc&quot;],
         &quot;columns&quot;: [
           { &quot;data&quot;: &quot;NAME&quot;, &quot;className&quot;: &quot;nws-tbl-name h4&quot; },
           { &quot;data&quot;: &quot;ID&quot;, &quot;className&quot;: &quot;nws-tbl-id&quot; },

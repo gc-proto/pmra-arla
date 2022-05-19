@@ -11,36 +11,111 @@
       "ID": "<a href=\"#\">PMRL2022-09</a>",
       "TYPE": "Proposed maximum residue limit",
       "AI": "<a href=\"#\">fluopyram</a>",
-      "OPENDATE": "June 30 2022"
+      "OPENDATE": "2022-06-30"
 
       }, {
       "NAME": "Pyraclostrobin",
         "ID": "<a href=\"#\">PMRL2022-08</a>",
         "TYPE": "Proposed maximum residue limit",
         "AI": "<a href=\"#\">Pyraclostrobin</a>",
-        "OPENDATE": "June 28 2022"
+        "OPENDATE": "2022-06-28"
 
         }, {
         "NAME": "Methyl Nonyl Ketone",
           "ID": "<a href=\"#\">PRVD2022-08</a>",
           "TYPE": "Proposed re-evaluation decision",
           "AI": "<a href=\"#\">Methyl Nonyl Ketone</a>",
-          "OPENDATE": "July 28 2022"
+          "OPENDATE": "2022-07-28"
 
           }, {
           "NAME": "potassium chloride and Potash Molluscicide",
             "ID": "<a href=\"#\">PRD2022-06</a>",
             "TYPE": "Proposed registration decision",
             "AI": "<a href=\"#\">potassium chloride and Potash Molluscicide</a>",
-            "OPENDATE": "May 28 2022"
+            "OPENDATE": "2022-05-28"
 
             }, {
             "NAME": "Topramezone",
               "ID": "<a href=\"#\">PMRL2022-07</a>",
               "TYPE": "Proposed maximum residue limit",
               "AI": "<a href=\"#\">Topramezone</a>",
-              "OPENDATE": "July 12 2022"
-              }
+              "OPENDATE": "2022-07-12"
+              }, {
+
+              "NAME": "Flutriafol",
+                "ID": "<a href=\"#\">PMRL2022-06</a>",
+                "TYPE": "Proposed maximum residue limit",
+                "AI": "<a href=\"#\">Flutriafol</a>",
+                "OPENDATE": "2022-06-26"
+
+                }, {
+
+                "NAME": "Glufosinate-ammonium",
+                  "ID": "<a href=\"#\">PMRL2022-05</a>",
+                  "TYPE": "Proposed maximum residue limit",
+                  "AI": "<a href=\"#\">Glufosinate-ammonium</a>",
+                  "OPENDATE": "2022-05-30"
+                  }, {
+
+                  "NAME": "thifensulfuron-methyl",
+                    "ID": "<a href=\"#\">PMRL2022-04</a>",
+                    "TYPE": "Proposed maximum residue limit",
+                    "AI": "<a href=\"#\">thifensulfuron-methyl</a>",
+                    "OPENDATE": "2022-05-30"
+                    }, {
+
+                    "NAME": "Mandestrobin",
+                      "ID": "<a href=\"#\">PMRL2022-03</a>",
+                      "TYPE": "Proposed maximum residue limit",
+                      "AI": "<a href=\"#\">Mandestrobin</a>",
+                      "OPENDATE": "2022-05-30"
+                      }, {
+
+                      "NAME": "pyraziflumid",
+                        "ID": "<a href=\"#\">PMRL2022-02</a>",
+                        "TYPE": "Proposed maximum residue limit",
+                        "AI": "<a href=\"#\">pyraziflumid</a>",
+                        "OPENDATE": "2022-05-14"
+                        }, {
+
+                        "NAME": "Notice of Intent: Consultation on proposed amendments to the Pest Control Products Regulations (Ultraviolet Radiation-emitting Devices and Ozone-generating Devices)
+",
+                          "ID": "<a href=\"#\">Canada Gazette, Part I</a>",
+                          "TYPE": "Other",
+                          "AI": "N/A",
+                          "OPENDATE": "Unknown"
+                          }, {
+
+                          "NAME": "(Z)-9-tricosene and its associated end-use products",
+                            "ID": "<a href=\"#\">PVRD2022-07</a>",
+                            "TYPE": " Proposed Re-evaluation Decision",
+                            "AI": "<a href=\"#\">(Z)-9-tricosene</a>",
+                            "OPENDATE": "2022-07-25"
+                            }, {
+
+                            "NAME": "Zoxamide and Its Associated End-use Products",
+                              "ID": "<a href=\"#\">PVRD2022-06</a>",
+                              "TYPE": " Proposed Re-evaluation Decision",
+                              "AI": "<a href=\"#\">Zoxamide</a>",
+                              "OPENDATE": "2022-06-26"
+                              }, {
+
+      "NAME": "1-Methylcyclopropene and Its Associated End-use Products",
+      "ID": "<a href=\"#\">PVRD2022-05</a>",
+      "TYPE": " Proposed Re-evaluation Decision",
+      "AI": "<a href=\"#\">1-Methylcyclopropene</a>",
+      "OPENDATE": "2022-06-22"
+
+
+            }, {
+              "NAME": "Chondrostereum purpureum strain PFC2139 and Its Associated End-use Products",
+              "ID": "<a href=\"#\">PVRD2022-03</a>",
+              "TYPE": " Proposed Re-evaluation Decision",
+              "AI": "<a href=\"#\">Chondrostereum purpureum strain PFC2139</a>",
+              "OPENDATE": "2022-06-20"
+
+
+                    }
 
     ]
 
