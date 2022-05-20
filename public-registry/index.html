@@ -128,12 +128,23 @@ margin: 5px;
                   <nav role="navigation" typeof="SiteNavigationElement" id="sm-pnl" class="sm-pnl wb-menu wb-menu-inited wb-init wb-navcurr-inited">
                     <h3>Main navigation menu</h3>
                       <ul class="list-unstyled mb-menu" role="menu">
-                        <li class="no-sect"><a class="mb-item" role="menuitem" aria-setsize="3" aria-posinset="1" tabindex="0" href="/index.html">Home</a></li>
+                        <li class="no-sect"><a class="mb-item" role="menuitem" aria-setsize="3" aria-posinset="1" tabindex="0" href="index.html">Home</a></li>
                         <li>
                           <details>
-                            <summary class="mb-item" role="menuitem" aria-setsize="3" aria-posinset="2" aria-haspopup="true" tabindex="-1"><a href="consultations.html">All Consultations</a></summary>
+                            <summary class="mb-item" role="menuitem" aria-setsize="3" aria-posinset="2" aria-haspopup="true" tabindex="-1"><a href="consultations.html">Updates</a></summary>
                             </details>
                           </li>
+                          <li>
+                            <details>
+                              <summary class="mb-item" role="menuitem" aria-setsize="3" aria-posinset="3" aria-haspopup="true" tabindex="-1">Updates and Activities</summary>
+                              <ul class="list-unstyled mb-sm" role="menu" aria-expanded="false" aria-hidden="true">
+                                  <li><a role="menuitem" aria-setsize="4" aria-posinset="1" tabindex="-1" href="consultations.html">Open consultations</a></li>
+                                <li><a role="menuitem" aria-setsize="4" aria-posinset="2" tabindex="-1" href="decisions-updates.html">Decisions and updates</a></li>
+                              </ul>
+                            </details>
+                          </li>
+
+
                           <li>
                             <details>
                               <summary class="mb-item" role="menuitem" aria-setsize="3" aria-posinset="3" aria-haspopup="true" tabindex="-1"><a href="activelist.html">Registered pesticides</a></summary>
@@ -189,8 +200,15 @@ margin: 5px;
                         <h2 class="wb-inv">Main navigation menu</h2>
                         <div class="row">
                           <ul class="list-inline menu" role="menubar">
-                            <li><a href="/index.html" class="item" tabindex="0" aria-posinset="1" aria-setsize="3" role="menuitem">Home</a></li>
-                            <li><a href="#undefined" class="item" tabindex="-1" aria-posinset="2" aria-setsize="3" role="menuitem" aria-haspopup="true">Consultations</a></li>
+                            <li><a href="index.html" class="item" tabindex="0" aria-posinset="1" aria-setsize="3" role="menuitem">Home</a></li>
+                            <li><a href="" class="item" tabindex="-1" aria-posinset="2" aria-setsize="3" role="menuitem" aria-haspopup="true">Updates and Activities</a>
+                              <ul class="sm list-unstyled" id="undefined" role="menu" aria-expanded="false" aria-hidden="true">
+                                <li><a role="menuitem" aria-setsize="4" aria-posinset="1" tabindex="-1" href="https://pest-control.canada.ca/pesticide-registry/en/active-ingredient-search.html">Active ingredient search</a></li>
+                              <li><a role="menuitem" aria-setsize="4" aria-posinset="2" tabindex="-1" href="https://pest-control.canada.ca/pesticide-registry/en/application-search.html">Application search</a></li>
+                            </ul>
+
+                            </li>
+
                             <li><a href="#undefined" class="item" tabindex="-1" aria-posinset="3" aria-setsize="3" role="menuitem" aria-haspopup="true">Registered pesticides</a></li>
                             <li><a href="#undefined" class="item" tabindex="-1" aria-posinset="2" aria-setsize="3" role="menuitem" aria-haspopup="true">Regulatory and policy documents</a></li>
                             <li><a href="#undefined" class="item" tabindex="-1" aria-posinset="3" aria-setsize="3" role="menuitem" aria-haspopup="true">Pesticide product information database<span class="expicon glyphicon glyphicon-chevron-down"></span></a>
@@ -276,11 +294,30 @@ margin: 5px;
   				<div class="col-md-8 pull-left" id="post-list">
               <h3>Latest postings</h3>
 
+
+                            <section class="panel panel-default">
+                              <div class="panel-body">
+                            <h5><a href="#">98Sumithrin, MGK 3145 MUP, and MGK Formula 31451 (PRD2022-07) - Proposed registration decision</a></h5>
+                            <p>Posted: 20 May 2022</p>
+                            <p><span class="label label-info">Open consultation</span><span class="fas fa-clock-o" title="" alt=""></span>  Open until 4 July, 2022</p>
+
+                              </div>
+                            </section>
+
+                            <section class="panel panel-default">
+                              <div class="panel-body">
+                            <h5><a href="#">Bacillus amyloliquefaciens strain MBI600 and Bacillus subtilis strain QST 713 (PRVD2022-08) Proposed Re-evaluation Decision</a></h5>
+                            <p>Posted: 20 May 2022</p>
+                            <p><span class="label label-info">Open consultation</span><span class="fas fa-clock-o" title="" alt=""></span>  Open until 18 August, 2022</p>
+                              </div>
+                            </section>
+
+
               <section class="panel panel-default">
                 <div class="panel-body">
               <h5><a href="#">Dried Blood and Its Associated End-use Products (RVD2022-08) - Re-evaluation decision</a></h5>
               <p>Posted: 16 May 2022</p>
-              <p><span class="label label-info">Decision</span></p>
+              <p><span class="label label-success">Decision</span></p>
                 </div>
               </section>
 
