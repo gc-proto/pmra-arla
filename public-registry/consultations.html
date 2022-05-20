@@ -260,7 +260,39 @@ margin: 5px;
 
 
 <div class="container">
+  <div class="row mrgn-tp-md">
+        <div class="col-md-3">
+          <details open>
+            <summary class="btn btn-primary">Filter options</summary>
+            <p class="mrgn-tp-md">Use these filters to find open consultations of interest.</p>
+            <form class="wb-tables-filter mrgn-lft-md mrgn-rght-md" data-bind-to="dataset-filter">
+              <div class="row">
+                <div class="form-group">
+                  <label for="dt_type">Notice type</label>
+                  <ul class="list-unstyled">
+                    <li class="checkbox"><label for="dt_type2"><input type="checkbox" id="dt_type1" name="dt_type" data-column="1" value="DIS">Discussion document (DIS)</label></li>
+                    <li class="checkbox"><label for="dt_type2"><input type="checkbox" id="dt_type2" name="dt_type" data-column="1" value="PMRL">Proposed maximum residue limit (PMRL)</label></li>
+                    <li class="checkbox"><label for="dt_type3"><input type="checkbox" id="dt_type3" name="dt_type" data-column="1" value="PVRD"> Proposed re-evaluation decision (PVRD)</label></li>
+                    <li class="checkbox"><label for="dt_type4"><input type="checkbox" id="dt_type4" name="dt_type" data-column="1" value="PRD"> Proposed registration decision (PRD)</label></li>
+                    <li class="checkbox"><label for="dt_type5"><input type="checkbox" id="dt_type5" name="dt_type" data-column="1" value="PSRD"> Proposed special review decision (PSRD)</label></li>
 
+                  </ul>
+
+
+                </div>
+
+                <div class="col-md-6">
+                  <button type="submit" class="btn btn-primary" aria-controls="dataset-filter">Filter</button>
+                </div>
+                <div class="col-md-6">
+                  <button type="reset" class="btn btn-default">Clear</button>
+                </div>
+              </div>
+
+            </form>
+          </details>
+        </div>
+        <div class="col-md-9 small">
           <table class="wb-tables table table-striped table-hover small" id="dataset-filter" aria-live="polite" data-wb-tables="{
         &quot;iDisplayLength&quot;: 100,
                           &quot;bDeferRender&quot;: true,
