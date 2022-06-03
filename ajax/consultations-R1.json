@@ -9,7 +9,7 @@
 
     }, {
     "NAME": "<a href=\"#\">Fluopyram</a>",
-      "ID": "<a href=\"#\">PMRL2022-09</a>",
+      "ID": "PMRL2022-09",
       "TYPE": "Proposed maximum residue limit",
 
     "POSTDATE": "2022-04-28",
@@ -17,7 +17,7 @@
 
       }, {
       "NAME": "<a href=\"#\">Pyraclostrobin</a>",
-        "ID": "<a href=\"#\">PMRL2022-08</a>",
+        "ID": "PMRL2022-08",
         "TYPE": "Proposed maximum residue limit",
 
             "POSTDATE": "2022-04-28",
@@ -25,7 +25,7 @@
 
         }, {
         "NAME": "<a href=\"#\">Methyl Nonyl Ketone</a>",
-          "ID": "<a href=\"#\">PRVD2022-08</a>",
+          "ID": "PRVD2022-08",
           "TYPE": "Proposed re-evaluation decision",
 
               "POSTDATE": "2022-04-29",
@@ -33,7 +33,7 @@
 
           }, {
           "NAME": "<a href=\"#\">Potassium chloride and Potash Molluscicide</a>",
-            "ID": "<a href=\"#\">PRD2022-06</a>",
+            "ID": "PRD2022-06",
             "TYPE": "Proposed registration decision",
 
                 "POSTDATE": "2022-04-13",
@@ -51,7 +51,7 @@
 
             }, {
             "NAME": "<a href=\"#\">Topramezone</a>",
-              "ID": "<a href=\"#\">PMRL2022-07</a>",
+              "ID": "PMRL2022-07",
               "TYPE": "Proposed maximum residue limit",
 
                 "POSTDATE": "2022-04-28",
@@ -59,7 +59,7 @@
               }, {
 
               "NAME": "<a href=\"#\">Flutriafol</a>",
-                "ID": "<a href=\"#\">PMRL2022-06</a>",
+                "ID": "PMRL2022-06",
                 "TYPE": "Proposed maximum residue limit",
 
                 "POSTDATE": "2022-04-12",
@@ -68,7 +68,7 @@
                 }, {
 
                 "NAME": "<a href=\"#\"><a href=\"#\">Glufosinate-ammonium</a>",
-                  "ID": "<a href=\"#\">PMRL2022-05</a>",
+                  "ID": "PMRL2022-05",
                   "TYPE": "Proposed maximum residue limit",
 
                   "POSTDATE": "2022-03-16",
@@ -76,15 +76,15 @@
                   }, {
 
                   "NAE": "<a href=\"#\">Thifensulfuron-methyl</a>",
-                    "ID": "<a href=\"#\">PMRL2022-04</a>",
+                    "ID": "PMRL2022-04",
                     "TYPE": "Proposed maximum residue limit",
-                    
+
                     "POSTDATE": "2022-03-16",
                     "OPENDATE": "2022-05-30"
                     }, {
 
                     "NAME": "<a href=\"#\"><a href=\"#\">Mandestrobin</a></a>",
-                      "ID": "<a href=\"#\">PMRL2022-03</a>",
+                      "ID": "PMRL2022-03,
                       "TYPE": "Proposed maximum residue limit",
 
                       "POSTDATE": "2022-03-16",
@@ -100,7 +100,7 @@
                         }, {
 
                         "NAME": "<a href=\"#\">Notice of Intent: Consultation on proposed amendments to the Pest Control Products Regulations (Ultraviolet Radiation-emitting Devices and Ozone-generating Devices)</a>",
-                          "ID": "<a href=\"#\">Canada Gazette, Part I</a>",
+                          "ID": "Canada Gazette, Part I",
                           "TYPE": "Other",
                           "AI": "N/A",
                           "POSTDATE": "2021-12-04",
@@ -108,7 +108,7 @@
                           }, {
 
                           "NAME": "<a href=\"#\">(Z)-9-tricosene and its associated end-use products</a>",
-                            "ID": "<a href=\"#\">PVRD2022-07</a>",
+                            "ID": "PVRD2022-07",
                             "TYPE": " Proposed Re-evaluation Decision",
 
                             "POSTDATE": "2022-04-26",
@@ -116,15 +116,14 @@
                             }, {
 
                                                         "NAME": "<a href=\"#\">Bacillus amyloliquefaciens strain MBI600 and Bacillus subtilis strain QST 713 and the Associated End- use Products</a>",
-                                                          "ID": "<a href=\"https://www.canada.ca/en/health-canada/services/consumer-product-safety/pesticides-pest-management/public/consultations/proposed-re-evaluation-decisions/2022/bacillus-amyloliquefaciens-strain-mbi600-subtilis-qst-713.html\">PVRD2022-08</a>",
+                                                          "ID": "PVRD2022-08",
                                                           "TYPE": "Proposed Re-evaluation Decision",
-
                                                           "POSTDATE": "2022-05-20",
                                                           "OPENDATE": "2022-08-18"
                                                           }, {
 
                             "NAME": "<a href=\"#\">Zoxamide and Its Associated End-use Products</a>",
-                              "ID": "<a href=\"#\">PVRD2022-06</a>",
+                              "ID": "PVRD2022-06",
                               "TYPE": " Proposed Re-evaluation Decision",
 
                                 "POSTDATE": "2022-03-28",
@@ -132,7 +131,7 @@
                               }, {
 
       "NAME": "<a href=\"#\">1-Methylcyclopropene and Its Associated End-use Products</a>",
-      "ID": "<a href=\"#\">PVRD2022-05</a>",
+      "ID": "PVRD2022-05",
       "TYPE": " Proposed Re-evaluation Decision",
 
     "POSTDATE": "2022-03-24",
@@ -141,7 +140,7 @@
 
             }, {
               "NAME": "<a href=\"#\">Chondrostereum purpureum strain PFC2139 and Its Associated End-use Products</a>",
-              "ID": "<a href=\"#\">PVRD2022-03</a>",
+              "ID": "PVRD2022-03",
               "TYPE": " Proposed Re-evaluation Decision",
 
               "POSTDATE": "2022-03-22",
@@ -150,7 +149,7 @@
 
               }, {
                 "NAME": "<a href=\"#\">Chlorothalonil</a>",
-                "ID": "<a href=\"#\">PSRD2022-01</a>",
+                "ID": "PSRD2022-01",
                 "TYPE": " Proposed Special Review Decision",
 
                 "POSTDATE": "2022-02-10",
