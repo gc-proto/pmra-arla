@@ -5,12 +5,10 @@
     "TYPE": "Discussion document",
     "POSTDATE": "2022-04-11",
     "OPENDATE": "2022-06-30"
-
     }, {
     "NAME": "<a href=\"#\">Fluopyram</a>",
       "ID": "PMRL2022-09",
       "TYPE": "Proposed maximum residue limit",
-
     "POSTDATE": "2022-04-28",
       "OPENDATE": "2022-06-30"
 
@@ -43,7 +41,6 @@
                       "NAME": "<a href=\"#\">98Sumithrin, MGK 3145 MUP, and MGK Formula 31451</a>",
                         "ID": "PRD2022-07",
                         "TYPE": "Proposed registration decision",
-
                             "POSTDATE": "2022-05-20",
                         "OPENDATE": "2022-07-04"
 
@@ -82,7 +79,7 @@
                     "OPENDATE": "2022-05-30"
                     }, {
 
-                    "NAME": "<a href=\"#\"><a href=\"#\">Mandestrobin</a></a>",
+                    "NAME": " href=\"#\"><a href=\"#\">Mandestrobin</a>",
                       "ID": "PMRL2022-03",
                       "TYPE": "Proposed maximum residue limit",
 
@@ -90,7 +87,7 @@
                       "OPENDATE": "2022-05-30"
                       }, {
 
-                      "NAME": "<a href=\"#\"><a href=\"#\">pyraziflumid</a></a>",
+                      "NAME": "<a href=\"#\">pyraziflumid</a>",
                         "ID": "PMRL2022-02",
                         "TYPE": "Proposed maximum residue limit",
 
@@ -107,7 +104,7 @@
                           }, {
 
                           "NAME": "<a href=\"#\">(Z)-9-tricosene and its associated end-use products</a>",
-                            "ID": "PVRD2022-07",
+                            "ID": "PRVD2022-07",
                             "TYPE": " Proposed Re-evaluation Decision",
 
                             "POSTDATE": "2022-04-26",
@@ -115,14 +112,14 @@
                             }, {
 
                                                         "NAME": "<a href=\"#\">Bacillus amyloliquefaciens strain MBI600 and Bacillus subtilis strain QST 713 and the Associated End- use Products</a>",
-                                                          "ID": "PVRD2022-08",
+                                                          "ID": "PRVD2022-08",
                                                           "TYPE": "Proposed Re-evaluation Decision",
                                                           "POSTDATE": "2022-05-20",
                                                           "OPENDATE": "2022-08-18"
                                                           }, {
 
                             "NAME": "<a href=\"#\">Zoxamide and Its Associated End-use Products</a>",
-                              "ID": "PVRD2022-06",
+                              "ID": "PRVD2022-06",
                               "TYPE": " Proposed Re-evaluation Decision",
 
                                 "POSTDATE": "2022-03-28",
@@ -130,7 +127,7 @@
                               }, {
 
       "NAME": "<a href=\"#\">1-Methylcyclopropene and Its Associated End-use Products</a>",
-      "ID": "PVRD2022-05",
+      "ID": "PRVD2022-05",
       "TYPE": " Proposed Re-evaluation Decision",
 
     "POSTDATE": "2022-03-24",
@@ -139,7 +136,7 @@
 
             }, {
               "NAME": "<a href=\"#\">Chondrostereum purpureum strain PFC2139 and Its Associated End-use Products</a>",
-              "ID": "PVRD2022-03",
+              "ID": "PRVD2022-03",
               "TYPE": " Proposed Re-evaluation Decision",
 
               "POSTDATE": "2022-03-22",
