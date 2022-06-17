@@ -1,0 +1,35 @@
+/* largely adopted from CRA application styles */
+
+.app-bar {
+    background: #26374A;
+  font-family: "Lato", "Noto sans", sans-serif;
+}
+
+.app-name {
+font-size: 18px;
+}
+
+.nvbar {
+  font-family: "Lato", "Noto sans", sans-serif;
+}
+
+.wb-tabs {
+  margin: 10px auto 20px;
+}
+
+.wb-tabs [role=tablist]>li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.wb-tabs [role=tablist]>li a {
+  padding: 5px 10px;
+}
+
+.wb-tabs [role=tablist]>li.active {
+  background-color: auto;
+}
+
+.wb-tabs [role=tablist]>li.active a {
+  border-width: 0 0 4px;
+}
