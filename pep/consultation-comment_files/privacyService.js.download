@@ -1,0 +1,33 @@
+'use strict';
+
+angular.module('hcFormApp').service('privacyService', ['dataService', 'formAlertService', '$sce', function(dataService, formAlertService, $sce) {
+  var language = $("html").attr("lang");
+  if (language == 'en') {
+    var loadingMsg = "Loading...";
+    var errorLoadingMsg = "Error loading content.";
+  } else {
+    var loadingMsg = "Téléchargement...";
+    var errorLoadingMsg = "Erreur de téléchargement du contenu.";
+  }
+
+  this.initialize = function($scope) {
+    // Initialize the Privacy Notice Statement Checkbox to unchecked.
+    $scope.acknowledgement = {'privacyStatement': false};
+    // Initialize the Security Notice Checkbox to unchecked.
+    $scope.acknowledgement = {'securityNotice': false};
+  };
+
+  this.loadPrivacyNoticeStatement = function($scope) {
+    // Http Get Privacy Statement.
+    $scope.privacyStatement = $sce.trustAsHtml(loadingMsg);
+    dataService.getPrivacyStatementHttpData($scope.form.formId, language, function(dataResponse) {
+      if (dataResponse != null) {
+        $scope.privacyStatement = $sce.trustAsHtml(dataResponse[0].name);
+      } else {
+        // Display error messages.
+        $scope.privacyStatement = $sce.trustAsHtml(errorLoadingMsg);
+        formAlertService.displayGetFailedFormAlert($scope);
+      }
+    });
+  };
+}]);

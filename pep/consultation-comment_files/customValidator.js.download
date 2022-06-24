@@ -1,0 +1,52 @@
+'use strict';
+// JQuery validation functions
+
+// Validate that at least field in a group is required.
+function validateGroup(groupClassName, errorMessage) {
+  $("." + groupClassName).each(function() {
+    $(this).rules('add', {
+      require_from_group: [1, "." + groupClassName],
+      messages: {
+        require_from_group: errorMessage
+      }
+    });
+  });
+}
+
+// Validate email address that can handle french accents.
+function validateEmail(groupClassName, language) {
+  var language = $("html").attr("lang");
+  var msgEnEmail = "Please enter a valid email address."
+  var msgFrEmail = "Veuillez fournir une adresse électronique valide."
+  var msgEmail = "";
+
+  if (language == "en") {
+    msgEmail = msgEnEmail;
+  } else if (language == "fr") {
+    msgEmail = msgFrEmail;
+
+  }
+
+  $.validator.addMethod("emailFormat", function(value, element, regexpr) {
+    return this.optional(element) || regexpr.test(value);
+  }, msgEmail);
+
+  if (groupClassName == "emailValidation") {
+    $("." + groupClassName).each(function() {
+      $(this).rules('add', {
+        required: false,
+        emailFormat: /^[^-.@]+([.-][^-.@]+)*@[^-.@]+([.-][^-.@]+)*$/
+      });
+    });
+  }
+
+  if (groupClassName == "emailValidationRequired") {
+    $("." + groupClassName).each(function() {
+      $(this).rules('add', {
+        required: true,
+        emailFormat: /^[^-.@]+([.-][^-.@]+)*@[^-.@]+([.-][^-.@]+)*$/
+      });
+    });
+  }
+
+}

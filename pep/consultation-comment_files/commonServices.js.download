@@ -1,0 +1,901 @@
+'use strict';
+
+angular.module('commonCtrl').service('commonService', ['commonCtrlMethods', 'dataService', 'setFocusById', '$timeout', function(commonCtrlMethods, dataService, setFocusById, $timeout) {
+  var language = $("html").attr("lang");
+
+  this.initialize = function($scope) {
+
+    $scope.areFormButtonsDisabled = false;
+    $scope.isDisplayFormAlert = false;
+    $scope.formAlertTitle = "-";
+    $scope.loadSpinner = false;
+    $scope.spinnerCounter = 0;
+    $scope.isSubmissionSuccessful = false;
+    $scope.todayDate = new Date();
+
+    $scope.collapseDetailsSummary = function(elementId) {
+      var myEl = angular.element(document.querySelector(elementId));
+      myEl.attr('open', false);
+    }
+
+    $scope.expandDetailsSummary = function(elementId) {
+      var myEl = angular.element(document.querySelector(elementId));
+      myEl.attr('open', true);
+    };
+
+    $scope.resetRelatedFields = function() {
+      for(var i = 0; i < arguments.length; i++) {
+        commonCtrlMethods.setLowestLevelObjectArrayProperty($scope, arguments[i], '');
+      }
+    }
+
+    //----------------------------START OF DOCUMENTS (ATTACHMENTS) ----------------------
+    // Start: handle adding/removing documents
+    $scope.fileCheckingError = [{'errorMessage': ''}];
+    $scope.fileSuccessMessage = {'successMessage': ''};
+    $scope.totalFileSize = {'size': 0};
+    $scope.filesRejected = [{'filename': ''}];
+    $scope.filesAccepted = [{'filename': ''}];
+    $scope.documents = {};
+    $scope.documents.document = [];
+
+    $scope.storeDocument = function(files) {
+      commonCtrlMethods.storeDocument(files, $scope.filesRejected, $scope.filesAccepted, $scope.fileSuccessMessage, $scope.fileCheckingError, $scope.numFileMaxExceedMsg, $scope.duplicationMsg, $scope.fileExtensionList, $scope.mimeTypeNotAcceptMsg, $scope.totalFileSize, $scope.singleFileSizeMaxExceedMsg, $scope.totalFileSizeMaxExceedMsg, $scope.fileUploadSuccessMsg, $scope.fileNameLengthExceedMsg, $scope.documents.document, commonCtrlMethods, $scope);
+    };
+
+    $scope.deleteDocument = function(index, selectedfileSize) {
+      commonCtrlMethods.deleteDocument(index, $scope, $timeout, $scope.fileCheckingError, $scope.filesRejected, $scope.filesAccepted, $scope.fileSuccessMessage, $scope.totalFileSize, $scope.documents.document, selectedfileSize, $scope.totalFileSizeMaxExceedMsg, 'document_fileName');
+    };
+
+    $scope.deleteAllDocuments = function() {
+      commonCtrlMethods.deleteAllDocuments($timeout, $scope.documents.document, $scope.totalFileSize, $scope.fileCheckingError, $scope.filesRejected, $scope.filesAccepted, $scope.fileSuccessMessage, 'document_fileName');
+    };
+
+    $scope.$on('ngRepeatFinishedDocuments', function() {
+
+      // Set focus on the first element of the newly added document block.
+      var indexOfLastElement = $scope.documents.document.length - 1;
+
+      if (indexOfLastElement >= 0) {
+        $timeout(function() {
+          angular.element("#document_fileData_" + indexOfLastElement).focus();
+        });
+      }
+    });
+
+    // Used in commonDirectives.
+    $scope.saveAndOrShowDoc = function(href, filename) {
+      return commonCtrlMethods.saveAndOrShowDocumentFireFoxChrome(href);
+    };
+
+    // Used in commonDirectives.
+    $scope.saveAndOrShowDocIEBrowser = function(href, filename, isShow) {
+      return commonCtrlMethods.saveAndOrShowDocument(href, filename, isShow);
+    };
+
+    // End: handle adding/removing documents.
+    //----------------------------END OF DOCUMENTS---------------------------------------
+
+    $scope.changeLocation = function(url, forceReload) {
+      $scope = $scope || angular.element(document).scope();
+      if (forceReload || $scope.$$phase) {
+        window.location = url;
+      } else {
+        //only use this if you want to replace the history stack
+        //$location.path(url).replace();
+
+        //this this if you want to change the URL and add it to the history stack
+        $location.path(url);
+        $scope.$apply();
+      }
+    };
+  };
+
+  this.populateCountryDropDown = function($scope) {
+    if (language == 'en') {
+      $scope.picklist_countries = [
+        {"id": "Canada", "name": "Canada"},
+        {"id": "United_States", "name": "United States"},
+        {"id": "Other", "name": "Other (Specify)"}];
+    } else {
+      $scope.picklist_countries = [
+        {"id": "Canada", "name": "Canada"},
+        {"id": "United_States", "name": "États-Unis"},
+        {"id": "Other", "name": "Autre (préciser)"}];
+    }
+  };
+
+  this.populateProvinceDropDown = function($scope) {
+    // Http Get Picklist.
+    $scope.picklist_provinces = null;
+    dataService.getPicklistHttpData("common-province", "en", function(dataResponse) {
+      if (dataResponse != null) {
+        $scope.picklist_provinces = dataResponse;
+      } else {
+        $scope.areFormButtonsDisabled = true;
+      }
+    });
+  };
+
+  this.populateStateDropDown = function($scope) {
+    // Http Get Picklist.
+    $scope.picklist_states = null;
+    dataService.getPicklistHttpData("common-state", "en", function(dataResponse) {
+      if (dataResponse != null) {
+        $scope.picklist_states = dataResponse;
+      } else {
+        $scope.areFormButtonsDisabled = true;
+      }
+    });
+  };
+}]);
+
+angular.module('commonCtrl').factory('commonCtrlMethods', ['$http', 'appConfig', 'modalBoxService', function($http, appConfig, modalBoxService) {
+  return {
+    saveAndOrShowDocumentFireFoxChrome: function(href) {
+      var byteStr = "";
+      var dataURI = "";
+      dataURI = href;
+      if (href != "") {
+        byteStr = atob(dataURI.split(',')[1]);
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        // write the bytes of the string to an ArrayBuffer
+        var arrayBuffer1 = new ArrayBuffer(byteStr.length);
+        var arrayUint1 = new Uint8Array(arrayBuffer1);
+        for(var i = 0; i < byteStr.length; i++) {
+          arrayUint1[i] = byteStr.charCodeAt(i);
+        }
+        return URL.createObjectURL(new Blob([arrayBuffer1], {type: mimeString}));
+      }
+    },
+    saveAndOrShowDocument: function(href, filename, isShow) {
+      var byteStr = "";
+      var dataURI = "";
+      dataURI = href;
+      if (href != "") {
+        byteStr = atob(dataURI.split(',')[1]);
+        var arrayBuffer = new ArrayBuffer(byteStr.length);
+        var arrayUint = new Uint8Array(arrayBuffer);
+        for(var j = 0; j < byteStr.length; j++) {
+          arrayUint[j] = byteStr.charCodeAt(j);
+        }
+        if (arrayUint != undefined && arrayUint != null) {
+          windowsNavigator(arrayUint, filename, isShow);
+        }
+      }
+      arrayBuffer = null;
+      arrayUint = null;
+    },
+    storeDocument: function(files, filesRejected, filesAccepted, fileSuccessMessage, fileCheckingError, numFileMaxExceedMsg, duplicationMsg, fileExtensionList, mimeTypeNotAcceptMsg, totalFileSize,
+                            singleFileSizeMaxExceedMsg, totalFileSizeMaxExceedMsg, fileUploadSuccessMsg, fileNameLengthExceedMsg, documents, commonCtrlMethods, scope) {
+      var totalFileSizeVal = totalFileSize.size;
+      var isFileRejected = false;
+      if (files && files.length) {
+        //Clear successMessage
+        fileSuccessMessage.successMessage = "";
+        //store list of rejected files
+        filesRejected.splice(1);
+        //store list of accepted files
+        filesAccepted.splice(1);
+        //store list of error messages for rejected files
+        fileCheckingError.splice(1);
+        //store success message
+        $(files).each(function() {
+          var reader = new FileReader();
+          var filename = this.name;
+          var size = this.size;
+          var type = this.type;
+          var isMatch = false;
+          var errorMessage = "";
+          var fileUnit = scope.fileUnit;
+          var isMatchReject = false;
+
+          totalFileSizeVal = totalFileSizeVal + size;
+
+          //Check for filename length
+          isMatch = commonCtrlMethods.checkFileNameLength(filename);
+          errorMessage = fileNameLengthExceedMsg;
+          if (isMatch) {
+            //stores a list of file error messages
+            fileCheckingError.push({'errorMessage': errorMessage + " (" + filename + ")"});
+            totalFileSizeVal = totalFileSizeVal - size;
+            isMatchReject = true;
+          }
+
+          //Check for duplicate files
+          isMatch = commonCtrlMethods.checkDuplicateFiles(filename, documents);
+          errorMessage = duplicationMsg;
+          if (isMatch) {
+            //stores a list of file error messages
+            fileCheckingError.push({'errorMessage': errorMessage + " (" + filename + ")"});
+            totalFileSizeVal = totalFileSizeVal - size;
+            isMatchReject = true;
+          }
+
+          //Check for mimetype
+          isMatch = commonCtrlMethods.checkMimeType(filename, fileExtensionList);
+          errorMessage = mimeTypeNotAcceptMsg;
+          if (isMatch) {
+            //stores a list of file error messages
+            fileCheckingError.push({'errorMessage': errorMessage + " (" + filename + ")"});
+            totalFileSizeVal = totalFileSizeVal - size;
+            isMatchReject = true;
+          }
+          //Check for single file size and total file size of all uploaded files
+          var isSizeMaxExceed = commonCtrlMethods.checkTotalSize(size, filename, totalFileSizeVal);
+          if (isSizeMaxExceed == 1) {
+            //stores a list of file error messages
+            fileCheckingError.push({'errorMessage': singleFileSizeMaxExceedMsg + " (" + filename + ")\n"});
+            totalFileSizeVal = totalFileSizeVal - size;
+            isMatchReject = true;
+          } else if (isSizeMaxExceed == 2) {
+            //stores a list of file error messages
+            fileCheckingError.push({'errorMessage': totalFileSizeMaxExceedMsg + " (" + filename + ")"});
+            totalFileSizeVal = totalFileSizeVal - size;
+            isMatchReject = true;
+          }
+          if (isMatchReject) {
+            filesRejected.push({'filename': filename + ' (' + size / 1000000 + ' ' + fileUnit + ')'});
+          }
+          isFileRejected = commonCtrlMethods.storeRejectedFilenames(filesRejected, filename, size);
+
+          //end of added
+          //Process file and store as dataURL into documents array
+          if (!isFileRejected) {
+            //Use fileReader to load the file and store into documents array
+            commonCtrlMethods.processFile(commonCtrlMethods, reader, filename, size, documents, duplicationMsg, fileCheckingError, totalFileSize, fileSuccessMessage, fileUploadSuccessMsg, filesRejected, filesAccepted, scope, fileUnit, isMatchReject, totalFileSizeVal);
+
+            //Use fileReader to read as a dataURL
+            reader.readAsDataURL(this);
+          }
+
+          //end of added
+          reader = null;
+        });
+        if (isFileRejected) {
+//					fileSuccessMessage.successMessage="";
+          //Stores a list of rejected files
+          scope.$apply(function() {
+            filesRejected;
+          });
+
+        }
+        files = null;
+      }
+    },
+    processFile: function(commonCtrlMethods, reader, filename, size, documents, duplicationMsg, fileCheckingError, totalFileSize, fileSuccessMessage, fileUploadSuccessMsg, filesRejected, filesAccepted, scope, fileUnit, isMatchReject, totalFileSizeVal) {
+      var isFileRejected = false;
+      //Use fileReader to load the file and store into documents array
+      reader.onload = function(e) {
+        //Check for total number of files attached
+        var currentNumberOfFiles = scope.documents.document.length;
+        isMatch = commonCtrlMethods.checkTotalNumFiles(currentNumberOfFiles);
+        errorMessage = scope.numFileMaxExceedMsg;
+        if (isMatch) {
+          //stores a list of file error messages
+          fileCheckingError.push({'errorMessage': errorMessage + " (" + filename + ")"});
+          totalFileSizeVal = totalFileSizeVal - size;
+          if (!isMatchReject) {
+            isMatchReject = true;
+            filesRejected.push({'filename': filename + ' (' + size / 1000000 + ' ' + fileUnit + ')'});
+          }
+        }
+        ;
+
+        if (!isMatchReject) {
+          //Check for duplicate files based on data url.  This will compare file content
+          var isMatch = commonCtrlMethods.checkDuplicateFilesDataURL(e, documents, filename);
+          var errorMessage = scope.duplicationContentMsg;
+          if (isMatch) {
+            fileCheckingError.push({'errorMessage': errorMessage + " (" + filename + ")"});
+            totalFileSizeVal = totalFileSizeVal - size;
+            if (!isMatchReject) {
+              filesRejected.push({'filename': filename + ' (' + size / 1000000 + ' ' + fileUnit + ')'});
+            }
+          }
+        }
+
+        isFileRejected = commonCtrlMethods.storeRejectedFilenames(filesRejected, filename, size, fileUnit);
+        if (!isFileRejected) {
+          totalFileSize.size = totalFileSize.size + size;
+
+          fileSuccessMessage.successMessage = fileUploadSuccessMsg;
+          filesAccepted.push({'filename': filename + ' (' + size / 1000000 + ' ' + fileUnit + ')'});
+          scope.$evalAsync(function() {
+            documents.push({'fileName': filename, 'fileData': e.target.result, 'fileSize': size});
+            filesAccepted;
+          });
+        }
+        if (isFileRejected) {
+          //Stores a list of rejected files
+          scope.$apply(function() {
+            filesRejected;
+          });
+        }
+        return isFileRejected;
+      };
+      reader.onloadstart = function(e) {
+        if (scope.spinnerCounter <= 0) {
+          scope.loadSpinner = true;
+          scope.$apply();
+        }
+        scope.spinnerCounter++;
+      };
+      reader.onloadend = function(e) {
+        scope.spinnerCounter--;
+        if (scope.spinnerCounter <= 0) {
+          scope.loadSpinner = false;
+          scope.$apply();
+        }
+      };
+    },
+    //Store list of rejected filenames
+    storeRejectedFilenames: function(filesRejected, filename, size, fileUnit) {
+      var isFileRejectedBool = false;
+      //angular array for rejected files
+      angular.forEach(filesRejected, function(value, key) {
+        if (value.filename == filename + ' (' + size / 1000000 + ' ' + fileUnit + ')') {
+          return isFileRejectedBool = true;
+        }
+      });
+      return isFileRejectedBool;
+      //end
+    },
+    //Delete document from document array
+    deleteDocument: function(index, scope, timeout, fileCheckingError, filesRejected, filesAccepted, fileSuccessMessage, totalFileSize, documents, selectedFileSize, totalFileSizeMaxExceedMsg, idOfFirstElementInNextSection) {
+      fileCheckingError.splice(1);
+      filesRejected.splice(1);
+
+      var totalFileSizeTemp = totalFileSize.size;
+      var totalFileSizeNew = totalFileSizeTemp - selectedFileSize;
+      totalFileSize.size = totalFileSizeNew;
+      if (totalFileSize.size > 70000000) {
+        fileCheckingError.push({'errorMessage': totalFileSizeMaxExceedMsg});
+        totalFileSize.size = totalFileSizeTemp;
+      }
+      documents.splice(index, 1);
+
+      var currentNumberOfFiles = scope.documents.document.length;
+
+      // Set focus on the appropriate element.
+      // If the document block to be removed is in the middles of the documents section,
+      // set focus on the first element of the next document block.
+      // If the document block is at the end of the documents section, and
+      // if there is no next document block, set focus on the subscribe link in the next section.
+      // If only document block is left, set focus on the remove all documents button.
+      if (index == currentNumberOfFiles) {
+        if (currentNumberOfFiles != 0) {
+          timeout(function() {
+            angular.element("#remove_all_documents").focus();
+          });
+        } else {
+          timeout(function() {
+            angular.element("#" + idOfFirstElementInNextSection).focus();
+          });
+        }
+      } else {
+        timeout(function() {
+          angular.element("#document_fileData_" + index).focus();
+        });
+      }
+      fileSuccessMessage.successMessage = "";
+      filesAccepted.splice(1);
+    },
+    //delete all documents from the document array
+    deleteAllDocuments: function(timeout, documents, totalFileSize, fileCheckingError, filesRejected, filesAccepted, fileSuccessMessage, idOfFirstElementInNextSection) {
+      angular.forEach(documents, function(value, key) {
+        documents.splice(key);
+      });
+      totalFileSize.size = 0;
+      fileCheckingError.splice(1);
+      filesRejected.splice(1);
+
+      timeout(function() {
+        // Set focus on the subscribe link in the next section.
+        angular.element("#" + idOfFirstElementInNextSection).focus();
+      });
+      fileSuccessMessage.successMessage = "";
+      filesAccepted.splice(1);
+    },
+
+    checkFileNameLength: function(filename) {
+      var isMatch = false;
+      var maxLength = 128;
+
+      if (filename.length > maxLength) {
+        return isMatch = true;
+      }
+
+      return isMatch;
+    },
+    //Check for duplicate files based on data url which compares file content
+    checkDuplicateFilesDataURL: function(e, documents, filename) {
+      var isMatch = false;
+      angular.forEach(documents, function(value, key) {
+
+        if (value.fileData == e.target.result && value.fileName != filename) {
+          return isMatch = true;
+        }
+
+      });
+      return isMatch;
+    },
+    //check for duplicate files based on filename
+    checkDuplicateFiles: function(filename, documents) {
+      var isMatch = false;
+      angular.forEach(documents, function(value, key) {
+        if (value.fileName == filename) {
+          return isMatch = true;
+        }
+      });
+      return isMatch;
+    },
+    //check for total number of files attached
+    checkTotalNumFiles: function(currentNumberOfFiles) {
+      var isMatch = false;
+      var maxNumberOfFiles = 3;
+
+      if (currentNumberOfFiles >= maxNumberOfFiles) {
+        isMatch = true;
+      }
+      return isMatch;
+    },
+    //Check for mimetype based on existing list of not accepted mime types
+    checkMimeType: function(filename, fileExtensionList) {
+      var isMatch = false;
+      angular.forEach(fileExtensionList, function(value, key) {
+        if (filename != '') {
+          var extArr = value.ext.split(",");
+          var index = filename.lastIndexOf(".");
+          var filenameExt = filename.substring(index + 1);
+          $(extArr).each(function() {
+            if (filenameExt.toUpperCase() == (this)) {
+              return isMatch = true;
+            }
+          });
+        }
+      });
+      return isMatch;
+    },
+    //Check for single file and total size of all uploade files.
+    checkTotalSize: function(size, filename, totalFileSizeVal) {
+      //To specify that the file size of single file is greater than 6 mb set numResult to 1
+      //To specify that the file size of the total files uploaded is greater than 100mb set numResult to 2
+      var isSizeExceeded = false;
+      if (size > 70000000) {
+        return 1;
+      } else if (totalFileSizeVal > 70000000) {
+        return 2;
+      }
+    },
+    // Help function that searches the object by the path, and return the property of the last level.
+    // Note: obj is a Javascript object, path is a string in the form of "a.b.c" (length is unknown).
+    getLowestLevelObjectProperty: function(obj, path) {
+      var arr = path.split('.');
+
+      if (typeof arr == "undefined" || arr == null)
+        return '';
+
+      var runner = obj;
+      for(var i = 0, max = arr.length - 1; i < max; ++i) {
+        // Make sure the key exists.
+        runner[arr[i]] = runner[arr[i]] || {};
+        // Move one level deeper.
+        runner = runner[arr[i]];
+      }
+
+      // Return the property in the last level.
+      return runner[arr[arr.length - 1]];
+    },
+    // Help function that searches the object by the path, and set the property of the last level by the passed value.
+    // Note: obj is a Javascript object, path is a string in the form of "a.b.c" (length is unknown).
+    setLowestLevelObjectProperty: function(obj, path, value) {
+      var arr = path.split('.');
+
+      if (typeof arr == "undefined" || arr == null)
+        return;
+
+      var runner = obj;
+      for(var i = 0, max = arr.length - 1; i < max; ++i) {
+        // Make sure the key exists.
+        runner[arr[i]] = runner[arr[i]] || {};
+        // Move one level deeper.
+        runner = runner[arr[i]];
+      }
+
+      // Set the value in the last level.
+      runner[arr[arr.length - 1]] = value;
+    },
+    // Help function that searches the object by the path, and set the property of the last level by the passed value.
+    // Note: obj is a Javascript object, path is a string in the form of "a.b[].c" (length is unknown).
+    setLowestLevelObjectArrayProperty: function(obj, path, value) {
+      var arr = path.split('.');
+
+      if (typeof arr == "undefined" || arr == null)
+        return;
+
+      var runner = obj;
+      for(var i = 0, max = arr.length - 1; i < max; ++i) {
+        runner = eval('runner.' + arr[i]);
+      }
+
+      // Set the value in the last level.
+      runner[arr[arr.length - 1]] = value;
+    },
+
+    //Data Export Functions
+    submitFormDataByFormID: function(sections, scope, postFormID) {
+      scope.loadSpinner = true;
+
+      var language = $("html").attr("lang");
+      if (language == "en") {
+        var submissionFailedMsg = "Online submission failed. We are experiencing technical difficulties at the moment, please try again later.";
+        var serverValidationFailedMsg = "Online submission failed due to a data validation error.";
+        var browserFailedMsg = "Unable to access the server. Please close your browser and try again.";
+        var IEbrowserFailedMsg = "<br/><br/><p><strong>Note:</strong> There is a known issue with Internet Explorer that may impact your ability to upload attachments.  If you experience any difficulties in uploading attachments, please try one of the following:</p><ul><li>Use another browser,</li><li>Close and restart Internet Explorer, or</li><li>Restart your computer.</li></ul>";
+      } else {
+        var submissionFailedMsg = "La transmission en ligne n’a pas fonctionné. Nous éprouvons actuellement des difficultés techniques. Veuillez essayer de nouveau plus tard.";
+        var serverValidationFailedMsg = "La transmission en ligne n’a pas fonctionné en raison d’une erreur de validation de données.";
+        var browserFailedMsg = "Votre demande en ligne a échouée en raison d’insuffisante mémoire allouée au navigateur.";
+        var IEbrowserFailedMsg = "<br/><br/><p><strong>REMARQUE :</strong> Un problème connu posé par Internet Explorer pourrait vous empêcher de télécharger des pièces jointes.  Si vous avez de la difficulté à télécharger des pièces jointes, veuillez essayer un des moyens suivants :</p><ul><li>Utilisez un autre navigateur;</li><li>Fermez et redémarrez Internet Explorer;</li><li>Redémarrez votre ordinateur.</li></ul>";
+      }
+
+      var formData = {};
+      var arrayLength;
+
+      if (!!sections) {
+        arrayLength = sections.length;
+        for(var i = 0; i < arrayLength; i++) {
+          if (typeof scope[sections[i][1]][sections[i][2]] === 'undefined') {
+            formData[sections[i][0]] = angular.copy(scope[sections[i][1]]);
+          } else {
+            formData[sections[i][0]] = angular.copy(scope[sections[i][1]][sections[i][2]]);
+          }
+        }
+      }
+
+//			var formDataCopy = angular.copy(formData);
+//			stripBlanks(formDataCopy);
+//			var formDataJSON = angular.toJson(formDataCopy);
+
+      stripBlanks(formData);
+      var formDataJSON = angular.toJson(formData);
+      var serviceEndPoint = appConfig.apiUrl_postFormData[postFormID];
+
+      $http({
+        method: 'POST',
+        url: serviceEndPoint,
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+        },
+        data: formDataJSON,
+        transformRequest: function(data) {
+          return data;
+        }
+      }).then(function(response) {  // Success
+        scope.loadSpinner = false;
+
+        var submissionNumber = response.data.submissionNumber;
+        var serverDateTime = response.data.serverDateTime;
+        var serverValidationSuccessful = response.data.successful;
+
+        if (serverValidationSuccessful) {
+          var submitterEmail = scope.submitter.email;
+          if (submitterEmail == undefined || submitterEmail == null || submitterEmail === "" || submitterEmail === "null" || submitterEmail.indexOf("@") <= -1) {
+            submitterEmail = "";
+          }
+          scope.isSubmissionSuccessful = true;
+
+          if (language == 'en') {
+            scope.changeLocation(gRoot + "/en/confirmation" +
+                "?sn=" + submissionNumber +
+                "&em=" + submitterEmail, true);
+          } else {
+            scope.changeLocation(gRoot + "/fr/confirmation" +
+                "?sn=" + submissionNumber +
+                "&em=" + submitterEmail, true);
+          }
+        }
+      }, function(response) {  // Failed
+        scope.loadSpinner = false;
+
+        if (response.status == 400 && !response.data.successful) {
+          // Server Validation Failed.
+
+          var serverResponse = angular.copy(response.data);
+          delete serverResponse.successful;
+          delete serverResponse.serverDateTime;
+          delete serverResponse.submissionNumber;
+          var errorDataField = "<br><br>" + JSON.stringify(serverResponse);
+
+          modalBoxService.displayAlertBox(scope, serverValidationFailedMsg + errorDataField);
+        } else {
+          if (response.status == 404) {
+            // Server is down.
+            modalBoxService.displayAlertBox(scope, submissionFailedMsg);
+          } else {
+            // Browser issues.
+            var browserErrorMsg = browserFailedMsg;
+            var msie = document.documentMode;  //documentMode contains IE version.
+            if (msie) {
+              browserErrorMsg = browserErrorMsg + IEbrowserFailedMsg;
+            }
+            modalBoxService.displayAlertBox(scope, browserErrorMsg);
+          }
+        }
+        $("#submitBtn").html(scope.submitBtnEnabledText);
+        scope.areFormButtonsDisabled = false;
+      });
+    }, // submitFormDataByFormID:function
+  }
+}]);
+
+// dataService - Web Service API
+angular.module('commonCtrl').service('dataService', ['$http', 'appConfig', 'modalBoxService', function($http, appConfig, modalBoxService) {
+  var language = $("html").attr("lang");
+  delete $http.defaults.headers.common['X-Requested-With'];
+
+  this.getPicklistHttpData = function(selectedFormField, language, callbackFunc) {
+    $http({
+      method: "GET",
+      url: appConfig.apiUrl_getPicklist,
+      params: {"field": selectedFormField, "lang": language}
+    }).then(function successCallback(response) {
+      // this callback will be called asynchronously when the response is available
+      callbackFunc(response.data);
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs or server returns response with an error status.
+      callbackFunc(null);
+    });
+  };
+
+  this.getPrivacyStatementHttpData = function(selectedForm, language, callbackFunc) {
+    $http({
+      method: "GET",
+      url: appConfig.apiUrl_getPrivacyStatement,
+      params: {"form": selectedForm, "lang": language}
+    }).then(function successCallback(response) {
+      // this callback will be called asynchronously when the response is available
+      callbackFunc(response.data);
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs or server returns response with an error status.
+      callbackFunc(null);
+    });
+  };
+}]);
+
+// formAlertService - Displays form alert.
+angular.module('commonCtrl').service('formAlertService', ['$timeout', 'setFocusById', function($timeout, setFocusById) {
+  var language = $("html").attr("lang");
+
+  this.displayGetFailedFormAlert = function($scope) {
+    if (language == "en") {
+      $scope.formAlertTitle = "Form load failed.";
+      $scope.formAlertBody = "We are experiencing technical difficulties at the moment, please try again later.";
+    } else {
+      $scope.formAlertTitle = "Échec du téléchargement du formulaire.";
+      $scope.formAlertBody = "Nous éprouvons actuellement des difficultés techniques. Veuillez essayer de nouveau plus tard.";
+    }
+    $scope.areFormButtonsDisabled = true;
+    $scope.isDisplayFormAlert = true;
+    setFocusById('formAlert');
+  }
+}]);
+
+// modalBoxService - Displays alert box and confirmation box using Lightbox.
+angular.module('commonCtrl').service('modalBoxService', ['$timeout', function($timeout) {
+  var language = $("html").attr("lang");
+  if (language == "en") {
+    var warningAlertTitle = 'Warning';
+  } else {
+    var warningAlertTitle = 'Avertissement';
+  }
+
+  this.displayAlertBox = function(scope, txt) {
+    scope.$evalAsync(function() {
+      angular.element(".messageTitle").html(warningAlertTitle);
+      angular.element(".messageBody").html(txt);
+
+      $("#messageModalAlertBox").trigger("open.wb-lbx", [[{src: "#messageModalAlertBox", type: "inline"}], true]);
+    });
+    $timeout(function() {
+      $("#closeBtn").focus();
+    }, 500);
+  };
+
+  this.displayConfirmBox = function(scope, txt, yesAction) {
+    angular.element(".messageTitle").html(warningAlertTitle);
+    angular.element(".messageBody").html(txt);
+
+    //Check if the yes button from the dialog box has been clicked
+    //If clicked set buttonClicked status to true
+    $("#yesBtn").unbind('click');
+    $("#yesBtn").click(function(e) {
+      scope.$eval(yesAction);
+      scope.$apply();
+    });
+
+    $("#messageModalConfirmBox").trigger("open.wb-lbx", [[{src: "#messageModalConfirmBox", type: "inline"}], true]);
+    $timeout(function() {
+      $("#noBtn").focus();
+    }, 500);
+  };
+
+}]);
+
+angular.module('commonCtrl').factory('setFocusById', function($timeout, $window) {
+  return function(id) {
+    $timeout(function() {
+      var element = $window.document.getElementById(id);
+      if (element) {
+        element.focus();
+        //element.scrollIntoView();
+        //window.location.hash = id;  //for IE.
+      }
+    });
+  };
+});
+
+angular.module('commonCtrl').factory('commonCtrlMessages', function() {
+  return {
+    successAlertTitle_en: 'Success',
+    warningAlertTitle_en: 'Warning',
+    duplicationContentMsg_en: 'The file you attempted to attach is a duplicate of an attachment already included to your online form. The filename is different but the content is the same.	The file was not attached.',
+    duplicationMsg_en: 'The file you attempted to attach is a duplicate of an attachment already included to your online form. The file was not attached.',
+    numFileMaxExceedMsg_en: 'The number of attachments exceeded the maximum limit. The file was not attached.',
+    mimeTypeNotAcceptMsg_en: 'The file you attempted to attach has a format that we do not accept. The file was not attached.',
+    totalFileSizeMaxExceedMsg_en: 'The cumulative total size of attachments to the online submission is above 70MB.',
+    singleFileSizeMaxExceedMsg_en: 'The file you attempted to attach has a file size greater than 70 MB. The file was not attached.',
+    fileNameLengthExceedMsg_en: 'The file you attempted to attach has a file name (File name and file extension) that is more than 128 characters. The file was not attached.',
+    fileUploadSuccessMsg_en: 'The selected file(s) were attached successfully to the online form.',
+
+    successAlertTitle_fr: 'Succès',
+    warningAlertTitle_fr: 'Avertissement',
+    duplicationContentMsg_fr: 'Le fichier que vous tentez de joindre est un double d’un fichier déjà joint à votre formulaire en ligne. Le nom du fichier est différent, mais le contenu est le même. Le fichier n’était pas joint.',
+    duplicationMsg_fr: 'Le fichier que vous tentez de joindre est un double d’un fichier déjà joint à votre formulaire en ligne. Le fichier n’était pas joint.',
+    numFileMaxExceedMsg_fr: 'Le nombre de pièces jointes dépasse la limite maximale. Le fichier n’était pas joint.',
+    mimeTypeNotAcceptMsg_fr: 'Le fichier que vous tentez de joindre est dans un format que nous n’acceptons pas. Le fichier n’était pas joint.',
+    totalFileSizeMaxExceedMsg_fr: 'Le total des pièces jointes à la transmission en ligne dépasse 70 Mo.',
+    singleFileSizeMaxExceedMsg_fr: 'Dans les pièces que vous tentez de joindre se trouve un fichier de plus de 70 Mo. Le fichier n’était pas joint.',
+    fileNameLengthExceedMsg_fr: 'Le fichier que vous tentez de joindre porte un nom (nom de fichier et extension) ayant plus de 128 caractères. Le fichier n’était pas joint.',
+    fileUploadSuccessMsg_fr: 'Les fichiers sélectionnés ont été joints avec succès au formulaire en ligne.',
+  };
+});
+
+angular.module('commonCtrl').factory('commonCtrlLabels', function() {
+  return {
+    numFileUploadMsg_en: 'Number of attachments: ',
+    totalFileSizeUploadMsg_en: 'Cumulative total size of attachments is: ',
+    maximumNumFileMsg_en: '(maximum is 3)',
+    maximumFileSizeMsg_en: '(maximum is 70 MB)',
+    rejectedFilesMsg_en: 'Rejected Files: ',
+    fileNameMsgLbl_en: 'Select up to maximum of three attachments',
+
+    numFileUploadMsg_fr: 'Nombre de pièces jointes : ',
+    totalFileSizeUploadMsg_fr: 'La taille totale cumulative des pièces jointes est : ',
+    maximumNumFileMsg_fr: '(le maximum est 3)',
+    maximumFileSizeMsg_fr: '(le maximum est 70 Mo)',
+    rejectedFilesMsg_fr: 'Fichiers rejetés : ',
+    fileNameMsgLbl_fr: 'Sélectionnez tout au plus trois pièces jointes',
+  };
+});
+
+angular.module('commonCtrl').factory('commonCtrlArrays', function() {
+  return {
+    fileExtensionList: [
+      {'ext': '7Z,7ZIP,_B,??,?Q,A,ACE,ADZ,AIN,ALX,ALZ,APK,APP,APZ,AR,ARC,ARJ,ASWCS,ATN,BA,BAT,BH'},
+      {'ext': 'BIX,BM,BOO,BUNDLF,BZ,BZ2,BZIP,BZIP2,CAR,CBR,CBZ,CEB,CP9,CPGZ,CPIO,CPT,DAR,DD,DEB,DGC'},
+      {'ext': 'DIST,EFW,EMZ,EX_,EXE,F,GCA,GZ,GZI,GZIP,HBC,HCXS,HBC2,HBE,HKI,HKI1,HKI2,IIO,HKI3,ICE,IPK,J'},
+      {'ext': 'JGZ,KGB,LBR,LHA,LQR,LZ,LZH,LZM,LZMA,LZO,LZX,MINT,MPKG,MZP,NAR,NSIS,OB$,PACKAGE,PAQ7,PAQ8'},
+      {'ext': 'PAR2,PARTIMG,PEA,PI$,PIM,PIT,PIZ,PKG,PROPDESC,PTH,PUP,PWA,PZIP,QDA,QL$,RAR,RK,RNC,RPM,RTE'},
+      {'ext': 'RZ,RZS,S7Z,SBU,SEA,SEG1,SEN,SFARK,SH,SHAR,SIS,SISX,SIT,SITX,SQX,TAF,TAR,TAR.GZ,TBZ2,TGZ,TLZ'},
+      {'ext': 'TLZMA,UC2,UHA,UU,VOL,VSI,WBA,WIM,WOT,XEF,XEZ,XMCDZ,XPI,Z,ZO1,ZIP,ZIPX,ZOO,ZPI,ZZ'},
+
+      {'ext': 'ACTION,APK,APP,BAT,BIN,CMD,COM,COMMAND,CPL,CSH,EXE,GADGET,INF1,INS,INX,IPA,ISU,JOB'},
+      {'ext': 'JSE,KSH,LNK,MSC,MSI,MSP,MST,OSX,OUT,PAF,PIF,PRG,PS1,REG,RGS,RUN,SCR,SCT,SHB,SHS,U3P'},
+      {'ext': 'VB,VBE,VBS,VBSCRIPT,WORKFLOW,WS,WSF,WSH'},
+
+      {'ext': '0XE,73K,89K,A6P,AC,ACC,ACR,ACTM,AHK,AIR,APP,ARSCRIPT,AS,ASB,AWK,AZW2,BEAM,BTM,CEL,CELX'},
+      {'ext': 'CHM,COF,CRT,DEK,DLD,DMC,DOCM,DOTM,DXL,EAR,EBM,EBS,EBS2,ECF,EHAM,ELF,ES,EX4,EXOPC,EZS'},
+      {'ext': 'FAS,FKY,FPI,FRS,FXP,GS,HAM,HMS,HPF,HTA,IIM,IPF,ISP,JAR,JS,JSX,KIX,LO,LS,MAM,MCR,MEL'},
+      {'ext': 'MPX,MRC,MS,MS,MXE,NEXE,OBS,ORE,OTM,PEX,PLX,POTM,PPAM,PPSM,PPTM,PRC,PVD,PWC,PYC,PYO'},
+      {'ext': 'QPX,RBX,ROX,RPJ,S2A,SBS,SCA,SCAR,SCB,SCRIPT,SMM,SPR,TCP,THM,TLB,TMS,UDF,UPX,URL,VLX'},
+      {'ext': 'VPM,WCM,WIDGET,WIZ,WPK,WPM,XAP,XBAP,XLAM,XLM,XLSM,XLTM,XQT,XYS,ZL9'}
+    ]
+  };
+});
+
+//Removes elements with blank values
+function stripBlanks(target) {
+  if (target) {
+    for(var property in target) {
+      if (target.hasOwnProperty(property)) {
+        var value = target[property];
+
+        if (value instanceof Object) {
+          stripBlanks(value);
+          if (Object.getOwnPropertyNames(value).length == 0) {
+            delete target[property];
+          }
+        }
+
+        if (value instanceof Array) {
+          if (value.length == 0) {
+
+            delete target[property];
+          } else {
+            for(var i = 0; i < value.length; i++) {
+              if (value[i] == undefined) {
+                delete target[property];
+              } else {
+                stripBlanks(value[i]);
+              }
+            }
+          }
+        }
+
+        if (value instanceof Date) {
+          if (value == "Invalid Date") {
+            delete target[property];
+          } else {
+            target[property] = value.toIsoString(); // Output: 2010-07-30T15:05:00-04:00
+          }
+        }
+
+        if (value == undefined || value == null || value === "" || value === "null") {
+
+          delete target[property];
+        }
+      }
+    }
+  }
+}
+
+//Hide or show the link that when clicked will open an IE save and/or open bar.
+function canUseMsSaveOrOpenBlobMthd() {
+  if (window.navigator.msSaveBlob || window.navigator.msSaveOrOpenBlob) {
+    return true;
+  }
+  return false;
+}
+
+function noEnter(event) {
+  return !(event && event.keyCode == 13);
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// Known Issues - The Safari browser throws a RangeError instead of returning null
+// when it tries to stringify a Date object with an invalid date value.
+// The only reliable way to prevent this is to monkeypatch the Date.prototype.toJSON method.
+var _DatetoJSON = Date.prototype.toJSON;
+Date.prototype.toJSON = function() {
+  try {
+    return _DatetoJSON.call(this);
+  } catch(e) {
+    if (e instanceof RangeError) {
+      return null;
+    }
+    throw e;
+  }
+};
+
+// Add Timezone Offset to date.
+Date.prototype.toIsoString = function() {
+  var tzo = -this.getTimezoneOffset(),
+      dif = tzo >= 0 ? '+' : '-',
+      pad = function(num) {
+        var norm = Math.abs(Math.floor(num));
+        return (norm < 10 ? '0' : '') + norm;
+      };
+  return this.getFullYear() +
+      '-' + pad(this.getMonth() + 1) +
+      '-' + pad(this.getDate()) +
+      'T' + pad(this.getHours()) +
+      ':' + pad(this.getMinutes()) +
+      ':' + pad(this.getSeconds()) +
+      dif + pad(tzo / 60) +
+      ':' + pad(tzo % 60);
+};

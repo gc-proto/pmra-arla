@@ -1,0 +1,27 @@
+'use strict';
+
+var gApiEndpoint = 'https://pest-control.canada.ca';
+var gPrivacyAndPicklistEndpoint = 'https://pest-control.canada.ca';
+var gRoot = '/public-engagement-portal';
+
+angular.module('commonCtrl', []);
+
+//Retrieves or overrides the default regular expression that is used for whitelisting of safe urls during a[href] sanitization.
+//The sanitization is a security measure aimed at preventing XSS attacks via html links.
+angular.module('commonCtrl').config(['$compileProvider', function($compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|data|file|blob):/);
+}]);
+
+// Application Configuration - constant values
+angular.module('commonCtrl').constant("appConfig", {
+  apiUrl_getPrivacyStatement: gPrivacyAndPicklistEndpoint +'/pep-api/service/privacy',
+  apiUrl_getPicklist: gPrivacyAndPicklistEndpoint + '/pep-api/service/picklist',
+  apiUrl_postFormData: {
+    '6027': gApiEndpoint + '/pep-api/service/informationServicesInquiry/post/',
+    '6125': gApiEndpoint + '/pep-api/service/complainViolationReport/post/',
+    '6500': gApiEndpoint + '/pep-api/service/consultationComment/post/',
+    '7000': gApiEndpoint + '/pep-api/service/applicationForInspectConfidentialTestData/post/',
+    '7004': gApiEndpoint + '/pep-api/service/noticeOfObjection/post/',
+    '7011': gApiEndpoint + '/pep-api/service/voluntaryIncidentReport/post/'
+  }
+});

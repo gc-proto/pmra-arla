@@ -1,0 +1,64 @@
+'use strict';
+
+angular.module('hcFormApp').service('commentsService', ['$timeout', 'dataService', 'formAlertService', function($timeout, dataService, formAlertService) {
+	var language = $( "html" ).attr("lang");
+
+	this.initialize = function($scope) {
+		$scope.comments = {};
+		$scope.comments.comment = [{}];
+
+         // Popup Confirmation Box Message
+        if (language=='en') {
+            $scope.deleteCommentMsg="Comment";
+        } else {
+            $scope.deleteCommentMsg="commentaire";
+        }
+
+		$scope.addComment = function () {
+			$scope.comments.comment.push({});
+		};
+
+		$scope.deleteComment = function (index) {
+			$scope.comments.comment.splice(index, 1);
+
+			var currentSize = $scope.comments.comment.length;
+
+			// Set focus to the first element of the next comment block.
+			// If there is no next block, set focus on the "Add Comment" button.
+			if (index == currentSize) {
+				$timeout(function () {
+					angular.element("#comment_addComment").focus();
+				});
+			} else {
+				$timeout(function () {
+					angular.element("#comment_topic_" + index).focus();
+				});
+			}
+		};
+
+		$scope.$on('ngRepeatFinishedComments', function(event, args) {
+			// Set focus on the first element of the newly added comment block.
+			// Note: args[0] is the current index ng repeat (comment).
+
+			// Note if there is only one comment block, don't set focus on its first element
+			// because this block is not added by the "Add" button.
+			if (args[0] != 0) {
+				angular.element("#comment_topic_" + args[0]).focus();
+			}
+		});
+	};
+
+	// Comments - What are you providing comments on?
+    this.populateWhatCommentsOnDropDown = function($scope) {
+		// Http Get Picklist.
+		$scope.picklist_whatCommentsOn = null;
+		dataService.getPicklistHttpData("6500-what-comments-on", language, function(dataResponse) {
+			if (dataResponse != null) {
+				$scope.picklist_whatCommentsOn = dataResponse;
+			} else {
+				// Display error messages.
+				formAlertService.displayGetFailedFormAlert($scope);
+			}
+		});
+	};
+}]);

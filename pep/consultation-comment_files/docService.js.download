@@ -1,0 +1,48 @@
+'use strict';
+
+angular.module('hcFormApp').service('docService', ['dataService', 'formAlertService', function(dataService, formAlertService) {
+	var language = $( "html" ).attr("lang");
+
+    this.initialize = function($scope) {
+		$scope.consultationDoc={};
+		$scope.isConsultationDocLinkFound = false;
+
+		$scope.changeConsultationDocLink = function (anchorID, selectedDocID) {
+			setTimeout(function() {
+				var anchorElement = document.getElementById(anchorID);
+				var picklistIndex = findIndexByKeyValue($scope.picklist_consultationDoc, 'id', selectedDocID)
+				var docLink = $scope.picklist_consultationDoc[picklistIndex].link
+				if (docLink) {
+					anchorElement.setAttribute('href', docLink);
+					$scope.isConsultationDocLinkFound = true;
+				} else {
+					$scope.isConsultationDocLinkFound = false;
+				}
+				$scope.$apply();
+			}, 100);
+		}
+
+		function findIndexByKeyValue(arraytosearch, key, valuetosearch) {
+			for (var i = 0; i < arraytosearch.length; i++) {
+				if (arraytosearch[i][key] == valuetosearch) {
+					return i;
+				}
+			}
+			return null;
+		}
+	};
+
+	// Document - Consultation document
+    this.populateConsultationDocDropDown = function($scope) {
+		// Get Http Picklist.
+		$scope.picklist_consultationDoc = null;
+		dataService.getPicklistHttpData("6500-consultation-document", language, function(dataResponse) {
+			if (dataResponse != null) {
+				$scope.picklist_consultationDoc = dataResponse;
+			} else {
+				// Display error messages.
+				formAlertService.displayGetFailedFormAlert($scope);
+			}
+		});
+	};
+}]);

@@ -1,0 +1,23 @@
+'use strict';
+
+angular.module('hcFormApp').service('submitterService', ['dataService', 'formAlertService', function(dataService, formAlertService) {
+	var language = $( "html" ).attr("lang");
+
+    this.initialize = function($scope) {
+		$scope.submitter={};
+	};
+
+	// Submitter - Type of organization
+    this.populateTypeOfOrganizationDropDown = function($scope) {
+		// Http Get Picklist.
+		$scope.picklist_typeOfOrganization = null;
+		dataService.getPicklistHttpData("6500-type-of-organization", language, function(dataResponse) {
+			if (dataResponse != null) {
+				$scope.picklist_typeOfOrganization = dataResponse;
+			} else {
+				// Display error messages.
+				formAlertService.displayGetFailedFormAlert($scope);
+			}
+		});
+	};
+}]);

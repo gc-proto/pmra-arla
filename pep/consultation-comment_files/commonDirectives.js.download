@@ -1,0 +1,416 @@
+'use strict';
+
+//This method is for Firefox and Chrome
+angular.module('commonCtrl').directive('clickDefaultDocumentSection', [
+	function() {
+		return {
+			retrict:'A',
+			link: function($scope, $ele,$attr) {
+				var confirmClicktxt = $attr.clickDefaultDocumentSection;
+				var arr=[];
+				arr=confirmClicktxt.split("::");
+				var href=arr[0];
+				var filename=arr[1];
+				var index=arr[2];
+				var downloadLink= $scope.saveAndOrShowDoc(href,filename);
+				$attr.$set('href',downloadLink);
+			}
+		};
+	}
+]);
+//THis method is only for IE browsers
+angular.module('commonCtrl').directive('preventRightClickDefaultSaveReport', [
+	function() {
+		return {
+			restrict: 'A',
+			link: function($scope, $ele) {
+				$ele.bind('keypress', function(e) {
+					if(e.keyCode==13){
+						e.preventDefault();
+						$scope.formDataChangeIEBrowserOnly();
+					}
+				});
+				$ele.bind('mousedown', function(e){
+					e.preventDefault();
+					$scope.formDataChangeIEBrowserOnly();
+				});
+				$ele.bind("contextmenu", function(e) {
+					e.preventDefault();
+					$scope.formDataChangeIEBrowserOnly();
+				});
+			}
+		};
+	}
+]);
+//This method is only for IE browsers
+angular.module('commonCtrl').directive('preventRightClickDefaultDocumentSection', [
+	function() {
+         return {
+        	retrict:'A',
+        	link: function($scope, $ele,$attr) {
+        		$ele.bind('keypress', function(e) {
+        			if(e.keyCode==13){
+        				var isShow=true;
+						e.preventDefault();
+						var confirmClicktxt = $attr.preventRightClickDefaultDocumentSection;
+						var arr=[];
+						arr=confirmClicktxt.split("::");
+						var href=arr[0];
+						var filename=arr[1];
+
+						$scope.saveAndOrShowDocIEBrowser(href,filename,isShow);
+        			}
+        	   });
+        	   $ele.bind('mousedown', function(e){
+        		   var isShow=true;
+        		   e.preventDefault();
+        		   var confirmClicktxt = $attr.preventRightClickDefaultDocumentSection;
+        		   var arr=[];
+        		   arr=confirmClicktxt.split("::");
+        		   var href=arr[0];
+        		   var filename=arr[1];
+
+        		   $scope.saveAndOrShowDocIEBrowser(href,filename,isShow);
+        	   });
+
+        	   $ele.bind("contextmenu", function(e) {
+        		   var isShow=true;
+        		   e.preventDefault();
+        		   var confirmClicktxt = $attr.preventRightClickDefaultDocumentSection;
+        		   var arr=[];
+        		   arr=confirmClicktxt.split("::");
+        		   var href=arr[0];
+        		   var filename=arr[1];
+        		   $scope.saveAndOrShowDocIEBrowser(href,filename,isShow);
+        	   });
+        	}
+        };
+	}
+]);
+
+angular.module('commonCtrl').directive('onFinishRenderDocuments', function ($timeout) {
+    return {
+    	restrict: 'A',
+    	link: function (scope, element, attr) {
+    		if (scope.$last === true) {
+    			$timeout(function () {
+    				scope.$emit('ngRepeatFinishedDocuments', [scope.$index]);
+    			});
+    		}
+    	}
+    }
+});
+// This is a fix to the issue of WET4 datepicker:
+// if you use the calendar to pick a date, the UI input will be populated, but
+// the angular model will not be updated.
+angular.module('commonCtrl').directive('hcformDatepicker', function ($parse,$filter) {
+    return function (scope, element, attrs) {
+        var ngModel = $parse(attrs.ngModel);
+
+        $(function() {
+	        element.bind(
+	        	"blur",
+		        function() {
+	        		var thisElementVal = element.val();
+	        		var currentElement = angular.element("#" + element.attr("id"));
+	                var currentScope = currentElement.scope();
+
+	                currentScope.$apply(function(){
+	                    var newDate = new Date(thisElementVal);
+	                    var convertedDate = new Date(newDate.getUTCFullYear(), newDate.getUTCMonth(), newDate.getUTCDate());
+	                    ngModel.assign(currentScope, convertedDate);
+	                });
+		        }
+		    );
+        });
+    }
+});
+
+angular.module('commonCtrl').directive('commonDocumentsMain',function()
+{
+	return{templateUrl: gRoot + '/formTemplates/DocumentsMain.html'};
+});
+
+angular.module('commonCtrl').directive('commonDocumentsMainBodyPanel',function()
+{
+	return{templateUrl: gRoot + '/formTemplates/DocumentsMain_PanelBody.html'};
+});
+
+angular.module('commonCtrl').directive('commonDocumentsMainBrowseButton',function()
+{
+	return{	templateUrl: gRoot + '/formTemplates/DocumentsMain_BrowseButton.html'};
+});
+
+angular.module('commonCtrl').directive('commonFormAlert',function()
+{
+	return{	templateUrl: gRoot + '/formTemplates/common_formAlert.html'};
+});
+
+angular.module('commonCtrl').directive('commonModalBoxes',function()
+{
+	return{	templateUrl: gRoot + '/formTemplates/common_modalBoxes.html'};
+});
+
+angular.module('commonCtrl').directive('commonMessageDisplay', function() {
+	return {
+        restrict: 'A',
+        controller: function($scope, commonCtrlLabels,commonCtrlMessages,commonCtrlArrays)
+		{
+			var language = $( "html" ).attr("lang");
+			$scope.canUseMSSaveorOpenBlobMthd = canUseMsSaveOrOpenBlobMthd();
+			$scope.fileExtensionList=commonCtrlArrays.fileExtensionList;
+			if(language=='en')
+			{
+				$scope.successAlertTitle=commonCtrlMessages.successAlertTitle_en;
+				$scope.warningAlertTitle=commonCtrlMessages.warningAlertTitle_en;
+
+				$scope.duplicationMsg=commonCtrlMessages.duplicationMsg_en;
+				$scope.duplicationContentMsg=commonCtrlMessages.duplicationContentMsg_en;
+				$scope.numFileMaxExceedMsg=commonCtrlMessages.numFileMaxExceedMsg_en;
+				$scope.mimeTypeNotAcceptMsg=commonCtrlMessages.mimeTypeNotAcceptMsg_en;
+				$scope.totalFileSizeMaxExceedMsg=commonCtrlMessages.totalFileSizeMaxExceedMsg_en;
+				$scope.singleFileSizeMaxExceedMsg=commonCtrlMessages.singleFileSizeMaxExceedMsg_en;
+				$scope.fileNameLengthExceedMsg=commonCtrlMessages.fileNameLengthExceedMsg_en;
+				$scope.fileUploadSuccessMsg=commonCtrlMessages.fileUploadSuccessMsg_en;
+
+				$scope.numFileUploadMsg=commonCtrlLabels.numFileUploadMsg_en;
+				$scope.totalFileSizeUploadMsg=commonCtrlLabels.totalFileSizeUploadMsg_en;
+				$scope.maximumNumFileMsg=commonCtrlLabels.maximumNumFileMsg_en;
+				$scope.maximumFileSizeMsg=commonCtrlLabels.maximumFileSizeMsg_en;
+				$scope.rejectedFilesMsg=commonCtrlLabels.rejectedFilesMsg_en;
+				$scope.fileNameMsgLbl=commonCtrlLabels.fileNameMsgLbl_en;
+				$scope.fileNameMsg=commonCtrlLabels.fileNameMsg_en;
+
+				 // CONFIRM BOX MESSAGES
+				$scope.deleteDocumentMsg = "Attachment ";
+				$scope.deleteAllDocumentsMsg ="Attachments";
+				$scope.DocumentSubSectionsPanelTitle="Attachment #";
+				$scope.removeSingleDocument="Remove Attachment #";
+				$scope.removeAll="Remove All Attachments";
+				$scope.fileUnit="MB";
+
+				$scope.requiredMsg="required";
+				$scope.formTopMsg="Protected when completed and received by Health Canada. Treasury Board Secretariat Government Security Policy.";
+				$scope.charactersRemainingMsg="Characters remaining: ";
+				$scope.yesMsg = "Yes";
+				$scope.noMsg = "No";
+				$scope.closeMsg = "Close";
+				$scope.submitBtnEnabledText = "Submit to <abbr title='Pest Management Regulatory Agency'>PMRA</abbr>";
+				$scope.submitBtnDisabledText = "Submitting...";
+			}
+			else if (language=='fr')
+			{
+				$scope.successAlertTitle=commonCtrlMessages.successAlertTitle_fr;
+				$scope.warningAlertTitle=commonCtrlMessages.warningAlertTitle_fr;
+
+				$scope.duplicationMsg=commonCtrlMessages.duplicationMsg_fr;
+				$scope.duplicationContentMsg=commonCtrlMessages.duplicationContentMsg_fr;
+				$scope.numFileMaxExceedMsg=commonCtrlMessages.numFileMaxExceedMsg_fr;
+				$scope.mimeTypeNotAcceptMsg=commonCtrlMessages.mimeTypeNotAcceptMsg_fr;
+				$scope.totalFileSizeMaxExceedMsg=commonCtrlMessages.totalFileSizeMaxExceedMsg_fr;
+				$scope.singleFileSizeMaxExceedMsg=commonCtrlMessages.singleFileSizeMaxExceedMsg_fr;
+				$scope.fileNameLengthExceedMsg=commonCtrlMessages.fileNameLengthExceedMsg_fr;
+				$scope.fileUploadSuccessMsg=commonCtrlMessages.fileUploadSuccessMsg_fr;
+
+				$scope.numFileUploadMsg=commonCtrlLabels.numFileUploadMsg_fr;
+				$scope.totalFileSizeUploadMsg=commonCtrlLabels.totalFileSizeUploadMsg_fr;
+				$scope.maximumNumFileMsg=commonCtrlLabels.maximumNumFileMsg_fr;
+				$scope.maximumFileSizeMsg=commonCtrlLabels.maximumFileSizeMsg_fr;
+				$scope.rejectedFilesMsg=commonCtrlLabels.rejectedFilesMsg_fr;
+				$scope.fileNameMsgLbl=commonCtrlLabels.fileNameMsgLbl_fr;
+				$scope.fileNameMsg=commonCtrlLabels.fileNameMsg_fr;
+
+				 // CONFIRM BOX MESSAGES
+				$scope.deleteDocumentMsg = "Pièce jointe ";
+				$scope.deleteAllDocumentsMsg ="Pièces jointes";
+				$scope.DocumentSubSectionsPanelTitle="Pièce jointe nº";
+				$scope.removeSingleDocument="Supprimer la pièce jointe nº";
+				$scope.removeAll="Supprimer toutes les pièces jointes";
+				$scope.fileUnit="Mo";
+
+				$scope.requiredMsg="obligatoire";
+				$scope.formTopMsg="Protégé une fois rempli et soumis à Santé Canada. Politique sur la sécurité, du Secrétariat du Conseil du Trésor.";
+				$scope.charactersRemainingMsg="Caractères restants : ";
+				$scope.yesMsg = "Oui";
+				$scope.noMsg = "Non";
+				$scope.closeMsg = "Fermer";
+				$scope.submitBtnEnabledText = "Soumettre à l\'<abbr title='Agence de réglementation de la lutte antiparasitaire'>ARLA</abbr>";
+				$scope.submitBtnDisabledText = "Transmission...";
+			}
+		}
+	};
+});
+
+//--- Detect change when the select drop down menu is chosen using cursor keys
+angular.module('commonCtrl').directive("select", function() {
+	return {
+		restrict: "E",
+		require: "?ngModel",
+		scope: false,
+		link: function (scope, element, attrs, ngModel) {
+			if (!ngModel) {
+				return;
+			}
+			element.bind("keyup", function() {
+				element.triggerHandler("change");
+			})
+		}
+	}
+});
+
+
+//Open a confirm dialogue box.
+//This method will capture the clicking action of the "yes" button to activate the delete method.
+angular.module('commonCtrl').directive('ngConfirmBox', ['modalBoxService',
+function(modalBoxService) {
+	return {
+		link: function(scope, element, attr) {
+			element.bind('click',function() {
+				var messageTextBeginning;
+				var messageTextRemoveAll;
+				var messageTextNotePart1;
+				var messageTextNotePart2;
+				var messageTextNotePart3;
+				var msg = "";
+				var textForUnder = "";
+				var textForAnd = "";
+				var messageTextNote;
+				var numberText;
+				//This is the value retrieved from the attribute ng-confirm-box in the button tag for remove all and remove single objects
+				//(e.g. document,{{$index+1}}
+				var confirmClicktxt = attr.ngConfirmBox;
+				//Retrieve attribute value and then split the string to store specified message text values.
+				//Text value at array position 0 is the type of object (e.g. document, affectedPerson)
+				//Text value at array position 1 is the index value of object (e.g 1,2,3)
+				//Note: scope.$eval() function is used to convert $index into the number value of the index
+				var parentArray = confirmClicktxt.split(",");
+
+				var language = $( "html" ).attr("lang");
+				if(language=='en')
+				{
+					messageTextBeginning="Are you sure you want to remove ";
+					messageTextRemoveAll="All";
+					textForUnder="under";
+					messageTextNotePart1="Note the";
+					messageTextNotePart2="information associated to the";
+					messageTextNotePart3=" selected will also be removed.";
+					textForAnd="and";
+					numberText=" # ";
+
+				}
+				else if(language=='fr')
+				{
+					messageTextBeginning="Êtes-vous certain de vouloir enlever les renseignements pour";
+					messageTextRemoveAll="tous les";
+					textForUnder="apparaissant sous";
+					messageTextNotePart1=" Notez que les renseignements de(s) ";
+					messageTextNotePart2="qui sont associés avec";
+					messageTextNotePart3=" seront aussi enlevées.";
+					textForAnd="et";
+					numberText=" nº ";
+				}
+
+				//Section has a sub section and that sub section has a sub section
+				if(parentArray.length>1)
+				{
+					msg = messageTextBeginning;
+					var childArray={};
+					for(var j=0; j<parentArray.length; j++)
+					{
+						var childArray = parentArray[j].split(":");
+						if(j<parentArray.length-1)
+						{
+							textForUnder=textForUnder;
+						}
+						else
+						{
+							textForUnder="";
+						}
+						msg=msg + " " + childArray[0] + numberText + scope.$eval(childArray[1]) + " " + textForUnder + " ";
+					}
+					msg = msg + "?";
+				}
+				else
+				{
+					//If the input has the structure {{deleteDeviceMsg}}:{{$parent.$index+1}} or {{deleteImporterMsg}}:{{$index + 1}}
+					//Section only has one sub section
+					var childArray= parentArray[0].split(":");
+					if(childArray.length>1)
+					{
+						var grandchildrenArray = childArray[0].split(";");
+						//This if statement is used to accomodate an additional message.  If a parent section is removed then all subsections contained
+						//within will be removed as well.
+						if(grandchildrenArray.length>1)
+						{
+							var textForAndTemp = textForAnd;
+							msg = messageTextBeginning+ " " + grandchildrenArray[0] +numberText+ childArray[1]+ "?";
+							//This for loop will accomodate a message structure like device;organization:index+1
+							//where device is the parent section, organization is a subsection and index is the parent index
+							msg = msg + "<br />"+messageTextNotePart1;
+							for(var k=1; k<grandchildrenArray.length; k++)
+							{
+								if(k<grandchildrenArray.length-1 && k!=grandchildrenArray.length-2)
+								{
+									textForAndTemp=",";
+								}
+								else if(k==grandchildrenArray.length-1)
+								{
+									textForAndTemp="";
+								}
+								else
+								{
+									textForAndTemp=textForAnd;
+								}
+								msg = msg + " " + grandchildrenArray[k].replace("l'", "") + " " + textForAndTemp;
+							}
+							msg = msg + " " + messageTextNotePart2 + " " + grandchildrenArray[0] + messageTextNotePart3 ;
+						}
+						else
+						{
+							msg = messageTextBeginning+ " " + childArray[0]+numberText+ scope.$eval(childArray[1])+ "?";
+						}
+					}
+					//If the input has the structure documents
+					//Message for remove all of the specified objects (e.g. remove all documents)
+					else
+					{
+						msg = messageTextBeginning+ " " + messageTextRemoveAll+" "+ parentArray[0]+ "?";
+					}
+				}
+
+				var yesAction = attr.confirmClick;
+				modalBoxService.displayConfirmBox(scope, msg, yesAction);
+			});
+		}//link
+	}; //return
+}]);
+
+// Confirm on page exit.
+angular.module('commonCtrl').directive('confirmOnExit', function() {
+	return {
+		link: function(scope, elem, attrs) {
+			window.onbeforeunload = function(){
+				if (scope.hcform.$dirty && !scope.isSubmissionSuccessful) {
+					return "The form has been updated, do you want to stay on the page?";
+				}
+			}
+		}
+	};
+});
+
+// Loading Spinner.
+angular.module('commonCtrl').directive('commonSpinner', function () {
+	return {
+		restrict: 'A',
+		replace:true,
+		template: '<div class="loadSpinner"><div class="spinner"></div></div>',
+		link: function (scope, element, attr) {
+			  scope.$watch('loadSpinner', function (val) {
+				  if (val)
+					  $(element).show();
+				  else
+					  $(element).hide();
+			  });
+		}
+	};
+});

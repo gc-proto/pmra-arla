@@ -1,0 +1,71 @@
+'use strict';
+
+angular.module('hcFormApp').controller('hcFormCtrl', ['$scope', 'commonCtrlMethods', 'commonService', 'privacyService', 'submitterService', 'docService', 'commentsService',
+	function ($scope, commonCtrlMethods, commonService, privacyService, submitterService, docService, commentsService)
+{
+	$scope.form={};
+	$scope.form.portal = "N";
+	$scope.form.formId = "6500";
+	$scope.form.language = $("html").attr("lang");
+
+	commonService.initialize($scope);
+	commonService.populateCountryDropDown($scope);
+	commonService.populateProvinceDropDown($scope);
+	commonService.populateStateDropDown($scope);
+
+	privacyService.initialize($scope);
+	privacyService.loadPrivacyNoticeStatement($scope);
+
+	submitterService.initialize($scope);
+	submitterService.populateTypeOfOrganizationDropDown($scope);
+
+	docService.initialize($scope);
+	docService.populateConsultationDocDropDown($scope);
+
+	commentsService.initialize($scope);
+	commentsService.populateWhatCommentsOnDropDown($scope);
+
+	localStorage.setItem('alert-collapsible-state-privacyStatement', 'open');
+	localStorage.setItem('alert-collapsible-state-securityNotice', 'open');
+
+	//----------------------------START OF EXPORT FUNCTIONS-----------------------
+	$scope.exportSections = [
+		['form', 'form'],
+		['submitter', 'submitter'],
+		['document', 'consultationDoc'],
+		['comments', 'comments', 'comment'],
+		['attachments', 'documents', 'document'],
+		['acknowledgement', 'acknowledgement']
+	];
+
+	$scope.exportModel = function () {
+		commonCtrlMethods.submitFormDataByFormID($scope.exportSections, $scope, $scope.form.formId);
+	};
+
+	$scope.submitForm = function(event) {
+
+		if ($scope.areFormButtonsDisabled == false) {
+			$scope.areFormButtonsDisabled = true;
+
+			$scope.expandDetailsSummary("#submitterDetailsSummary");
+			$scope.expandDetailsSummary("#consultationDocDetailsSummary");
+			$scope.expandDetailsSummary("#commentsDetailsSummary");
+			$scope.expandDetailsSummary("#attachmentsDetailsSummary");
+
+			var hcForm = $( "#hcform" );
+			hcForm.validate();
+
+			if(hcForm.valid())
+			{
+				$("#submitBtn").html($scope.submitBtnDisabledText);
+				$scope.exportModel();
+				event.preventDefault();
+			} else {
+				$scope.areFormButtonsDisabled = false;
+			}
+		}
+	};
+	//----------------------------END OF EXPORT FUNCTIONS-------------------------
+}]);
+
+
