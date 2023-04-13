@@ -8,7 +8,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta charset="utf-8"/>
-<title>Accessible data tables (samples) - Canada.ca</title>
+<title>Task 1A - Table 1 - Canada.ca</title>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 
 
@@ -210,11 +210,19 @@
             <div class="mwstitle section">
 
 
-                      <h1 property="name" id="wb-cont" dir="ltr">Table 1-PRVD2022-17</h1>
+                      <h1 property="name" id="wb-cont" dir="ltr">Task 1A - Table 1</h1>
+                      <!-- Task description -->
+                      <details>
+                        <summary>Task 1A - Instructions</summary>
+                        <h2 class="h3">Part 1</h2>
+                        <p>Refer to Table 1 below. What does the chronic value for groundwater mean?</p>
+                        <h2 class="h3">Part 2</h2>
+                        <p>Table 1 visually highlights one of the values in the table. Can you tell which value that is with your screen reader? What do you think that value is supposed to communicate?</p>
+                      </details>
 
-                      <table class="table table-bordered">
+                      <table id="t1" class="table table-bordered">
                         <caption class="text-left">
-                            Table 3.3.1 Level 1 Estimated environmental concentrations (EECs) of quizalofop-p-ethyl in drinking water
+                            Table 1 - Level 1 Estimated environmental concentrations (EECs) of quizalofop-p-ethyl in drinking water
                         </caption>
                         <!--table header starts-->
                       <thead>
@@ -225,10 +233,10 @@
                           <th colspan="2">Surface Water (µg a.i./L) Reservoir</th>
                         </tr>
                       <tr class="bg-primary">
-                        <th>Acute<sup>1</sup><span class="wb-inv">see footnote 1 for details</span></th>
-                        <th>Chronic<sup>2</sup><span class="wb-inv">see footnote 1 for details</span></th>
-                        <th>Acute<sup>3</sup><span class="wb-inv">see footnote 1 for details</span></th>
-                        <th>Chronic<sup>4</sup><span class="wb-inv">see footnote 1 for details</span></th>
+                        <th>Acute<sup id="fn1t1-0-rf"><a class="fn-lnk" href="#fn1t1"><span class="wb-inv">Footnote </span>1</a></sup><span class="wb-inv">see footnote 1 for details</span></th>
+                        <th>Chronic<sup id="fn2t1-0-rf"><a class="fn-lnk" href="#fn2t1"><span class="wb-inv">Footnote </span>2</a></sup><span class="wb-inv">see footnote 1 for details</span></th>
+                        <th>Acute<sup id="fn3t1-0-rf"><a class="fn-lnk" href="#fn3t1"><span class="wb-inv">Footnote </span>3</a></sup><span class="wb-inv">see footnote 1 for details</span></th>
+                        <th>Chronic<sup id="fn4t1-0-rf"><a class="fn-lnk" href="#fn4t1"><span class="wb-inv">Footnote </span>4</a></sup><span class="wb-inv">see footnote 1 for details</span></th>
                       </tr>
                       </thead>
                       <!-- table body starts -->
@@ -241,8 +249,7 @@
                             peas<br> 
                             72 g a.i./ha;<br> 
                             1 <br><br>
-                            application/seas<br> 
-                            on</td>
+                            application/season</td>
                           <td class="text-center">quizalofop-p-ethyl +<br> 
                             quizalofop-p +<br>  
                             hydroxy-quizalofop-p +<br>  
@@ -254,25 +261,51 @@
                           <td class="text-center">0.80</td>
                         </tr>
                       </tbody>
+                      <!-- Footer Section -->
                       <tfoot>
                         <tr>
-                          <td colspan="6"><div class="wb-fnote wb-init wb-fnote-inited" role="note" id="wb-auto-4">
-                            <dl>
-                              <dt id="fn1t1-dt">Footnote 1</dt>
-                              <dd id="fn1t1" tabindex="-1">
-                                <p><sup>1&nbsp;&nbsp;90th percentile of daily average concentrations.<br>
-                                   2&nbsp;&nbsp;90th percentile of 365-day moving average concentrations.<br>
-                                   3&nbsp;&nbsp;90th percentile of peak concentrations from each year.<br>
-                                   4&nbsp;&nbsp;90th percentile of yearly average concentrations.</sup></p>
-                                <p class="fn-rtn"><a href="#fn1t1-rf"><span class="wb-inv">Return to table footnote </span>1<span class="wb-inv"> referrer</span></a></p>
-                              </dd>
-                            </dl>
-                          </div></td>
+                            <td colspan="8" class="wb-fnote wb-init wb-fnote-inited" role="note" id="wb-auto-4">
+                    <dl>
+                        <!-- Footnote 1 -->
+                        <dt id="fn1t1-dt">Footnote 1</dt>
+                        <dd id="fn1t1" tabindex="-1">
+                            <p>90th percentile of daily average concentrations.</p>
+                            <p class="fn-rtn"><a href="#fn1t1-rf"><span class="wb-inv">Return to footnote </span>1<span class="wb-inv"> referrer</span></a></p>
+                        </dd>
+                        <!-- Footnote 2 -->
+                        <dt id="fn2t1-dt">Footnote 2</dt>
+                        <dd id="fn2t1" tabindex="-1">
+                            <p>90th percentile of 365-day moving average concentrations.</p>
+                            <p class="fn-rtn"><a href="#fn2t1-rf"><span class="wb-inv">Return to footnote </span>2<span class="wb-inv"> referrer</span></a></p>
+                        </dd>
+                        
+                        <!-- Footnote 3 -->
+                        <dt id="fn3t1-dt">Footnote 3</dt>
+                        <dd id="fn3t1" tabindex="-1">
+                            <p>90th percentile of peak concentrations from each year.</p>
+                            <p class="fn-rtn"><a href="#fn3t1-rf"><span class="wb-inv">Return to footnote </span>3<span class="wb-inv"> referrer</span></a></p>
+                        </dd>
+                        <!-- Footnote 4 -->
+                        <dt id="fn4t1-dt">Footnote 4</dt>
+                        <dd id="fn4t1" tabindex="-1">
+                            <p>90th percentile of yearly average concentrations.</p>                                    
+                            <p class="fn-rtn"><a href="#fn4t1-rf"><span class="wb-inv">Return to footnote </span>4<span class="wb-inv"> referrer</span></a></p>
+                        </dd>
+                       
+                    </dl>			
+                            </td>
                         </tr>
-                      </tfoot>
+                    </tfoot>
                       </table>
 </div>
 
+<!-- Pagination -->
+<nav aria-label="Section navigation" class="mrgn-bttm-lg mrgn-tp-lg"><h3 class="wb-inv">Section navigation</h3>
+    <ul class="pager">
+      <li class="previous disabled"><a href="#" rel="prev">Previous</a></li>
+      <li class="next"><a href="../accessible-tables/table-2.html" rel="next"><span class="wb-inv">Next: </span>Continue to next task</a></li>
+    </ul>
+    </nav>
 
             <div class="pagedetails">
 <div class="row">
